@@ -23,6 +23,9 @@
     <header>
         <a href="#" class="logo">PENGlobal</a>
 
+        <input type="checkbox" name="" id="menu-bar">
+        <label for="menu-bar">Menu</label>
+
         <nav class="navbar">
             <ul>
                 <li><a href="#">home</a></li>

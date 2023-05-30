@@ -75,3 +75,57 @@ header .navbar ul li:hover > ul {
     display: initial;
 }
 
+#menu-bar {
+    display: none;
+}
+
+header label {
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: none;
+}
+
+
+@media(max-width:1100px){
+    header {
+        padding: 20px;
+    }
+
+    header label {
+        display: initial;
+    }
+
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: black;
+        border-top: 1px solid #ED7B43;
+        display: none;
+    }
+
+    header .navbar ul li {
+        width: 100%;
+    }
+
+    header .navbar ul li ul {
+        position: relative;
+        width: 100%;
+    }
+
+    header .navbar ul li ul li {
+        background-color: rgb(10, 10, 10);
+    }
+
+    header .navbar ul li ul li ul {
+        width: 100%;
+        left: 0;
+    }
+
+    #menu-bar:checked ~ .navbar {
+        display: initial;
+    }
+}
+
