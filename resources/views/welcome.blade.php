@@ -10,7 +10,7 @@
       @if ($posts[0]->featured_image)
         <a href="{{ route('posts.view', $posts[0]->slug)}}">
           <img src="{{ $posts[0]->featured_image }}">
-        </a>adafd
+        </a>
       @endif
       <a href="{{ route('posts.view', $posts[0]->slug)}}">
         <h1>{{ $posts[0]->title }}</h1>

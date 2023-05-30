@@ -26,6 +26,7 @@ use App\Http\Controllers\PostController;
 
 Route::get('/segments/{category:slug}', [WebController::class, 'view_segment'])->name('segments.view');
 
+Route::get('/newhome', [WebController::class, 'newhome'])->name('newhome');
 Route::get('/about', [WebController::class, 'about'])->name('about');
 Route::get('/contact', [WebController::class, 'contact'])->name('contact');
 Route::post('/submit_contact_form', [WebController::class, 'submitContactForm'])->name('submit_contact_form');

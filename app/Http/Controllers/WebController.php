@@ -64,4 +64,9 @@ class WebController extends Controller
 
         return to_route('contact');
     }
+
+    public function newhome()
+    {
+        return view('newhome');
+    }
 }
