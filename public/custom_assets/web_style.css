@@ -84,6 +84,7 @@ header .navbar ul li ul li {
 }
 
 header .navbar ul li ul li a {
+    font-size: 14px;
     padding: 5px 0;
 }
 

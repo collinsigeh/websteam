@@ -30,7 +30,7 @@
             <ul>
                 <li><a href="{{ route('welcome') }}">home</a></li>
                 <li><a href="{{ route('about') }}">about</a></li>
-                <li><a href="#">segments +</a>
+                <li><a href="#">report segments <i class="fas fa-caret-down"></i></a>
                     <ul>
                         @foreach ($segments as $segment)
                         <li><a href="{{ route('segments.view', $segment->slug) }}">{{ $segment->category_name }}</a></li>
