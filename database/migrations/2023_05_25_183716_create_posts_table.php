@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('body');
             $table->string('featured_image')->nullable();
             $table->string('tags')->nullable();
+            $table->bigInteger('primary_category_id');
             $table->enum('visibility', ['public', 'paid_subscribers', 'private'])->default('public');
             $table->tinyInteger('is_scheduled')->default(0);
             $table->timestamp('publish_at')->nullable()->default(null);

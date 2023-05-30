@@ -15,11 +15,21 @@ class WebController extends Controller
     public function welcome()
     {
         $segments = Category::where('is_active', 1)->get();
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->take(4)->get();
+        $post_blocks = [];
 
-        return view('welcome', [
+        foreach($segments as $segment)
+        {
+            if($segment->posts->count() > 0)
+            {
+                array_push($post_blocks, ['title' => $segment->category_name, 'posts' => Post::where('primary_category_id', $segment->id)->latest()->take(4)->get()]);
+            }
+        }
+
+        return view('webhome', [
             'segments' => $segments,
             'posts' => $posts,
+            'post_blocks' => $post_blocks,
         ]);
     }
 

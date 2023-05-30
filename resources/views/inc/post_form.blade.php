@@ -77,6 +77,16 @@
     <label for="publication_settings">Publication Settings:</label>
 </div>
 
+<div class="mb-3">
+    <label for="primary_category" class="col-form-label">Primary Category:</label>
+    <select class="form-select" aria-label="Primary category" id="primary_category" name="primary_category" required>
+        <option value=""></option>
+        @foreach ($categories as $category)
+        <option value="{{ $category->id }}" @if (isset($post) && $post->primary_category_id == $category->id) selected @else @if (old('primary_category') == $category->id) selected @endif @endif>{{ $category->category_name }}</option>
+        @endforeach
+    </select>
+</div>
+
 <div class="mb-4">
     <label for="visibility" class="col-form-label">Visibility:</label>
     <select class="form-select" aria-label="Post visibility options" id="visibility" name="visibility" required>

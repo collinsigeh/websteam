@@ -17,6 +17,7 @@ class Post extends Model
         'body',
         'featured_image',
         'tags',
+        'primary_category_id',
         'visibility',
         'is_scheduled',
         'publish_at',

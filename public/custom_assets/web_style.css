@@ -171,15 +171,70 @@ header label {
 /* MAIN PAGE */
 
 main {
-    margin-top: 10px;
+    margin-top: 20px;
+    color: black;
 }
 
-.col-lg-9 {
-    background-color: #666666;
+#latest-post, .next-to-latest, .block-post {
+    background-color: #f7f7f7;
+    margin-bottom: 20px;
+    min-height: 250px;
+    border-bottom: 1px dotted black;
 }
 
-#latest-post {
-    width: 970x;
-    height: 400px;
+#latest-post a, .next-to-latest a, .block-post a {
+    color: black;
+    text-decoration: none;
+}
+
+#latest-post img, .next-to-latest img, .block-post img {
+    width: 100%
+}
+
+#latest-post h2, .next-to-latest h5, .block-post h6 {
+    padding: 15px;
+    font-weight: bold;
+    line-height: 1.4em;
+}
+
+.sidebar-ad {
+    width: 300px;
+    height: 250px;
     background-color: #ED7B43;
+}
+
+.segment-block {
+    margin-top: 50px;
+    border-top: 1px dotted black;
+    text-align: center;
+}
+
+.segment-block .title {
+    margin-top: -12px;
+}
+
+.segment-block .segment-title {
+    padding: 5px 20px;
+    background-color: black;
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.segment-block .block-post {
+    text-align: left;
+    margin-top: 25px;
+}
+
+/* FOOTER */
+
+footer {
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+footer a {
+    color: black;
 }

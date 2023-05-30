@@ -61,6 +61,7 @@ class PostController extends Controller
             'body' => 'required',
             'featured_image' => 'sometimes|image',
             'tags' => 'sometimes|max:200',
+            'primary_category' => 'required|integer',
             'visibility' => 'required|in:public,paid_subscribers,private',
             'publish_at' => 'sometimes|date',
         ]);
@@ -82,6 +83,7 @@ class PostController extends Controller
         }
 
         $post->tags = $request->tags;
+        $post->primary_category_id = $request->primary_category;
         $post->visibility = $request->visibility;
 
         if($request->publish_post)
@@ -156,6 +158,7 @@ class PostController extends Controller
             'body' => 'required',
             'featured_image' => 'sometimes|image',
             'tags' => 'sometimes|max:200',
+            'primary_category' => 'required|integer',
             'visibility' => 'required|in:public,paid_subscribers,private',
             'publish_at' => 'sometimes|date',
         ]);
@@ -175,6 +178,7 @@ class PostController extends Controller
         }
 
         $post->tags = $request->tags;
+        $post->primary_category_id = $request->primary_category;
         $post->visibility = $request->visibility;
 
         if($request->publish_post)
