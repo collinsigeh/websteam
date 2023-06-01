@@ -179,8 +179,15 @@ main {
 #latest-post, .next-to-latest, .block-post {
     background-color: #f7f7f7;
     margin-bottom: 20px;
-    min-height: 250px;
     border-bottom: 1px dotted black;
+}
+
+#latest-post, .next-to-latest {
+    min-height: 350px;
+}
+
+.block-post {
+    min-height: 250px;
 }
 
 #latest-post a, .next-to-latest a, .block-post a {
@@ -239,3 +246,4 @@ footer {
 footer a {
     color: black;
 }
+

@@ -20,7 +20,12 @@
         @include('inc.alert_messages')
 
         <div class="data-card">
-            
+            @if ($posts->count() < 1)
+            <div class="text-center">
+                <div class="alert alert-info">No post to dispay.</div>
+                <a href="{{ route('posts.create') }}" class="btn btn-appprimary">Create your first post</a>
+            </div>
+            @else
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -83,6 +88,7 @@
             <div class="mt-3">
                 {!! $posts->links() !!}
             </div>
+            @endif
         </div>
     </div>
 </div>

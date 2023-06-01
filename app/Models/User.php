@@ -26,6 +26,7 @@ class User extends Authenticatable
         'is_writer',
         'is_active',
         'username',
+        'paid_subscription_end_at',
         'email',
         'password',
     ];

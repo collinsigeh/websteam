@@ -22,6 +22,7 @@ return new class extends Migration
             $table->tinyInteger('is_editor')->default(0);
             $table->tinyInteger('is_author')->default(0);
             $table->tinyInteger('is_active')->default(0);
+            $table->dateTime('paid_subscription_end_at')->nullable()->default(null);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -23,9 +23,9 @@ return new class extends Migration
             $table->bigInteger('primary_category_id');
             $table->enum('visibility', ['public', 'paid_subscribers', 'private'])->default('public');
             $table->tinyInteger('is_scheduled')->default(0);
-            $table->timestamp('publish_at')->nullable()->default(null);
+            $table->dateTime('publish_at')->nullable()->default(null);
             $table->tinyInteger('is_published')->default(0);
-            $table->timestamp('published_at')->nullable()->default(null);
+            $table->dateTime('published_at')->nullable()->default(null);
             $table->bigInteger('views')->default(0);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
