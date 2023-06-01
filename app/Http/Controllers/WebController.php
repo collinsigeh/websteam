@@ -15,14 +15,14 @@ class WebController extends Controller
     public function welcome()
     {
         $segments = Category::where('is_active', 1)->get();
-        $posts = Post::latest()->take(4)->get();
+        $posts = Post::where('is_published', 1)->latest()->take(4)->get();
         $post_blocks = [];
 
         foreach($segments as $segment)
         {
             if($segment->posts->count() > 0)
             {
-                array_push($post_blocks, ['title' => $segment->category_name, 'posts' => Post::where('primary_category_id', $segment->id)->latest()->take(4)->get()]);
+                array_push($post_blocks, ['title' => $segment->category_name, 'posts' => Post::where('is_published', 1)->where('primary_category_id', $segment->id)->latest()->take(4)->get()]);
             }
         }
 

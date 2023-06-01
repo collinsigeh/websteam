@@ -15,6 +15,8 @@
         <!-- Favicons -->
         @include('layouts.favicon')
 
+        @include('inc.social_share_snippet_1')
+
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="/admin_assets/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="/custom_assets/style.css">
@@ -22,6 +24,8 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
     </head>
     <body class="sb-nav-fixed">
+        @include('inc.social_share_snippet_2')
+
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="{{ route('home') }}">

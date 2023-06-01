@@ -25,7 +25,7 @@
     <div class="col-md-4">
         <div class="mb-3">
             <div>
-                <label class="col-form-label">Featured Image <small>(Optional)</small>: <br><small class="text-muted">HINT - Best size: 1200 x 600</small></label>
+                <label class="col-form-label">Featured Image <small>(Optional)</small>: <br><small class="text-muted">HINT - Best size: 1200 x 600 <i>or</i> 600 x 300</small></label>
                 
             </div>
             <div id="preview">@if (isset($post) && $post->featured_image ) <img src="{{ $post->featured_image }}" alt=""> @else <p>Preview</p> @endif</div>

@@ -8,7 +8,7 @@
         <li class="breadcrumb-item active">All Posts</li>
     </ol>
     <div class="mb-4"> 
-        <div class="mb-3 py-1" style="background-color: #f0f0f0;">
+        <div class="mb-3 py-1 bg-appgrey">
             <form class="form-inline m-3">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="ItemSearch" />

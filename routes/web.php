@@ -34,6 +34,7 @@ Route::post('/submit_contact_form', [WebController::class, 'submitContactForm'])
 Route::resource('/categories', CategoryController::class);
 
 Route::post('/upload', [PostController::class, 'upload'])->name('ckeditor.upload');
+Route::patch('/posts/{id}', [PostController::class, 'quickupdate'])->name('posts.quickupdate');
 Route::resource('/posts', PostController::class);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

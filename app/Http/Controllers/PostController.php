@@ -118,8 +118,11 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $categories = Category::orderBy('category_name', 'asc')->get();
+
         return view('posts.show', [
             'post' => $post,
+            'categories' => $categories,
         ]);
     }
 
@@ -229,5 +232,41 @@ class PostController extends Controller
             $url = asset('media/'.$fileName);
             return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
         }
+    }
+
+    /**
+     * Quickly Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function quickupdate(Request $request, Post $post)
+    {
+        $validated = $request->validate([
+            'primary_category' => 'required|integer',
+            'visibility' => 'required|in:public,paid_subscribers,private',
+            'publication_status' => 'required',
+        ]);
+        
+        $post->primary_category_id = $request->primary_category;
+        $post->visibility = $request->visibility;
+
+        if($request->publication_status == 1)
+        {
+            $post->is_published = 1;
+            if($post->published_at == null)
+            {
+                $post->published_at = Carbon::now()->toDateTimeString();
+            }
+        }
+        else
+        {
+            $post->is_published = 0;
+        }
+
+        $post->save();
+        
+        return back()->with('success_message', 'Update saved.');
     }
 }

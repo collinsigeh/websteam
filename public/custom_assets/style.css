@@ -103,3 +103,25 @@
 .table-featured-img {
     width: 45px;
 }
+
+.bg-appgrey {
+    background-color: #f0f0f0;
+}
+
+.post-info {
+    padding: 15px;
+}
+
+.post-url {
+    background-color: #fdfdfd;
+    padding: 5px;
+    color: #707070;
+}
+
+.post-total-views {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #fdfdfd;
+    color: #707070;
+}
