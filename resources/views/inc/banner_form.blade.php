@@ -2,7 +2,7 @@
     <div class="col-md-8">
         <div class="mb-3">
             <label for="title" class="col-form-label">Banner Ad Title:</label>
-            <input type="text" class="form-control" id="title" placeholder="Title of new post" name="title"  value="@if ($purpose == 'Edit' && isset($banner)) {{ $banner->title }} @else {{ old('title') }} @endif" autocomplete="title" required>
+            <input type="text" class="form-control" id="title" placeholder="Title of new banner ad" name="title"  value="@if ($purpose == 'Edit' && isset($banner)) {{ $banner->title }} @else {{ old('title') }} @endif" autocomplete="title" required>
                                                             
             @error('title')
                 <span class="invalid-feedback" role="alert">
@@ -21,6 +21,27 @@
                 </span>
             @enderror
         </div>
+        
+        @if ($purpose == 'Edit')
+        <div class="mb-3">
+            <label for="publication_status" class="col-form-label">Display Status:</label>
+            <select class="form-select" aria-label="Banner display status options" id="publication_status" name="display_status" required>
+                <option value="{{ $banner->is_active }}" selected>
+                    @if ($banner->is_active == 1)
+                        Active
+                    @else
+                        NOT Active
+                    @endif
+                </option>
+                <option value=""></option>
+                @if ($banner->is_active == 1)
+                    <option value="0">Disable</option>
+                @else
+                    <option value="1">Enable</option>
+                @endif
+            </select>
+        </div>
+        @endif
 
         <div class="row">
             <div class="col-md-6">
@@ -101,10 +122,10 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="{{ $category->id }}" name="categories[{{ $category->id }}]"
                         @php
-                            if ($purpose == 'Edit' && isset($post))
+                            if ($purpose == 'Edit' && isset($banner))
                             {
                                 $category_found = 0;
-                                foreach ($post->categories as $this_category) {
+                                foreach ($banner->categories as $this_category) {
                                     if ($this_category->id == $category->id) {
                                         $category_found++;
                                     }
@@ -133,7 +154,7 @@
             </div>
             <div id="preview">@if (isset($banner) && $banner->featured_image ) <img src="{{ $banner->featured_image }}" alt=""> @else <p>Preview</p> @endif</div>
             <label for="image" class="upload-label" id="upload-label">@if (isset($banner->featured_image) && $banner->featured_image) Change featured image @else Select a file @endif</label>
-            <input type="file" accept="image/*" id="image" onchange="getImagePreview(event)" name="featured_image" class="upload-field" value="{{ old('featured_image') }}" required>
+            <input type="file" accept="image/*" id="image" onchange="getImagePreview(event)" name="featured_image" class="upload-field" value="{{ old('featured_image') }}" @if($purpose != 'Edit') required @endif>
         </div>
 
         <div class="mb-3">
