@@ -12,8 +12,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="redirect_url" class="col-form-label">Redirect URL:</label>
-            <input type="text" class="form-control" id="redirect_url" placeholder="Web address to redirect to" name="redirect_url"  value="@if ($purpose == 'Edit' && isset($banner)) {{ $banner->redirect_url }} @else {{ old('redirect_url') }} @endif" autocomplete="redirect_url" required>
+            <label for="redirect_url" class="col-form-label">Redirect URL: <small>(e.g. https://...)</small></label>
+            <input type="url" class="form-control" id="redirect_url" placeholder="Web address to redirect to" name="redirect_url"  value="@if ($purpose == 'Edit' && isset($banner)) {{ $banner->redirect_url }} @else {{ old('redirect_url') }} @endif" autocomplete="redirect_url" required>
                                                             
             @error('redirect_url')
                 <span class="invalid-feedback" role="alert">
@@ -90,7 +90,7 @@
 
                 <div class="mb-4">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="display_on_allsegments" onchange="displaySegmentOption(event)" name="schedule_publishing" value="1"   @if (isset($post) && !$post->is_scheduled) notchecked @else checked @endif>
+                        <input class="form-check-input" type="checkbox" id="display_on_allsegments" onchange="displaySegmentOption(event)" name="display_on_allsegments" value="1"   @if (isset($post) && !$post->is_scheduled) notchecked @else checked @endif>
                         <label class="form-check-label" for="display_on_allsegments">Display on all segments</label>
                     </div>
                 </div>

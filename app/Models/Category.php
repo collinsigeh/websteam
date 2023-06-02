@@ -16,6 +16,11 @@ class Category extends Model
         'is_active',
     ];
 
+    public function banners(): BelongsToMany
+    {
+        return $this->belongsToMany(Banner::class);
+    }
+
     public function posts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class);
