@@ -35,9 +35,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $categories = Category::where('is_active', 1)->orderBy('category_name', 'asc')->get();
+        if ($categories->count() < 1)
+        {
+            $request->session()->put('error_message', 'No post category found. Start by creating one here.');
+            return to_route('categories.create');
+        }
         $min_time = Carbon::now()->timestamp + (60 * 60 * 2);
         $min_time = date('Y-m-d H:i',$min_time);
 
@@ -133,9 +138,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Request $request, Post $post)
     {
         $categories = Category::where('is_active', 1)->orderBy('category_name', 'asc')->get();
+        if ($categories->count() < 1)
+        {
+            $request->session()->put('error_message', 'No post category found. Start by creating one here.');
+            return to_route('categories.create');
+        }
         $min_time = Carbon::now()->timestamp + (60 * 60 * 2);
         $min_time = date('Y-m-d H:i',$min_time);
 

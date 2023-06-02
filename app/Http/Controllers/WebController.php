@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Mail\ContactMail;
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -78,5 +79,16 @@ class WebController extends Controller
     public function newhome()
     {
         return view('newhome');
+    }
+
+    /**
+     * Handles the redirection of clicks.
+     *
+     * @param  \App\Models\Banner  $banner
+     * @return \Illuminate\Http\Response
+     */
+    public function redirect(Banner $banner)
+    {
+        //
     }
 }

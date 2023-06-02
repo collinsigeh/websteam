@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,10 @@ Route::get('/segments/{category:slug}', [WebController::class, 'view_segment'])-
 Route::get('/newhome', [WebController::class, 'newhome'])->name('newhome');
 Route::get('/about', [WebController::class, 'about'])->name('about');
 Route::get('/contact', [WebController::class, 'contact'])->name('contact');
+Route::get('/click/{id}', [WebController::class, 'redirect'])->name('banners.redirect');
 Route::post('/submit_contact_form', [WebController::class, 'submitContactForm'])->name('submit_contact_form');
+
+Route::resource('/banners', BannerController::class);
 
 Route::resource('/categories', CategoryController::class);
 

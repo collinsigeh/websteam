@@ -112,8 +112,8 @@
                             </a>
                             <div class="collapse" id="collapseAdverts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">All Banner Ads</a>
-                                    <a class="nav-link" href="#">New Banner Ad</a>
+                                    <a class="nav-link" href="{{ route('banners.index') }}">All Banner Ads</a>
+                                    <a class="nav-link" href="{{ route('banners.create') }}">New Banner Ad</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">More Options</div>
@@ -179,7 +179,7 @@
 
             function scheduleOption(event)
             {
-                var isPublishing = document.getElementById('publish_post')
+                var isPublishing = document.getElementById('publish_post');
                 var scheduleDiv = document.getElementById('scheduling_box');
                 if(isPublishing.checked)
                 {
@@ -193,7 +193,7 @@
 
             function publishAtOption(event)
             {
-                var isScheduling = document.getElementById('schedule_publishing')
+                var isScheduling = document.getElementById('schedule_publishing');
                 var publishAtDiv = document.getElementById('publish_at_box');
                 if(isScheduling.checked)
                 {
@@ -202,6 +202,20 @@
                 else
                 {
                     publishAtDiv.style.display = 'none';
+                }
+            }
+
+            function displaySegmentOption(event)
+            {
+                var displayOnAllSegments = document.getElementById('display_on_allsegments');
+                var displaySegmentDiv = document.getElementById('display_segments_box');
+                if(displayOnAllSegments.checked)
+                {
+                    displaySegmentDiv.style.display = 'none';
+                }
+                else
+                {
+                    displaySegmentDiv.style.display = 'block';
                 }
             }
         </script>

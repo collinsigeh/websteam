@@ -25,12 +25,12 @@
     <div class="col-md-4">
         <div class="mb-3">
             <div>
-                <label class="col-form-label">Featured Image <small>(Optional)</small>: <br><small class="text-muted">HINT - Best size: 1200 x 600 <i>or</i> 600 x 300</small></label>
+                <label class="col-form-label">Featured Image <small>(Optional)</small>: <br><small class="text-muted">HINT - Best images sizes: <br>1200 x 600 <i>-or-</i> 800 x 400 <i>-or-</i> 600 x 300</small></label>
                 
             </div>
             <div id="preview">@if (isset($post) && $post->featured_image ) <img src="{{ $post->featured_image }}" alt=""> @else <p>Preview</p> @endif</div>
             <label for="image" class="upload-label" id="upload-label">@if (isset($post->featured_image) && $post->featured_image) Change featured image @else Select a file @endif</label>
-            <input type="file" id="image" onchange="getImagePreview(event)" name="featured_image" class="upload-field" value="{{ old('featured_image') }}">
+            <input type="file" accept="image/*" id="image" onchange="getImagePreview(event)" name="featured_image" class="upload-field" value="{{ old('featured_image') }}">
         </div>
 
         <div class="mb-3">
