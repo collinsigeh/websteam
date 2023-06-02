@@ -156,7 +156,12 @@ class BannerController extends Controller
      */
     public function show(Banner $banner)
     {
-        //
+        $categories = Category::orderBy('category_name', 'asc')->get();
+
+        return view('banners.show', [
+            'banner' => $banner,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -165,9 +170,26 @@ class BannerController extends Controller
      * @param  \App\Models\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function edit(Banner $banner)
+    public function edit(Request $request, Banner $banner)
     {
-        //
+        $categories = Category::where('is_active', 1)->orderBy('category_name', 'asc')->get();
+        if ($categories->count() < 1)
+        {
+            $request->session()->put('error_message', 'No post category found. Start by creating one here.');
+            return to_route('categories.create');
+        }
+        $min_time = Carbon::now()->timestamp + (60 * 60 * 2);
+        $min_time = date('Y-m-d H:i',$min_time);
+        
+        $min_stop_time = Carbon::now()->timestamp + (60 * 60 * 26);
+        $min_stop_time = date('Y-m-d H:i',$min_stop_time);
+
+        return view('banners.edit', [
+            'banner' => $banner,
+            'categories' => $categories,
+            'min_time' => $min_time,
+            'min_stop_time' => $min_stop_time,
+        ]);
     }
 
     /**
@@ -188,8 +210,53 @@ class BannerController extends Controller
      * @param  \App\Models\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Banner $banner)
+    public function destroy(Request $request, Banner $banner)
     {
-        //
+        $featured_image = basename($banner->featured_image);
+
+        $banner->delete();
+
+        if (strlen($featured_image) > 2 && File::exists(public_path('media/'.$featured_image)))
+        {
+            File::delete(public_path('media/'.$featured_image));
+        }
+
+        $request->session()->put('success_message', 'Banner ad deleted Successfully.');
+    
+        return to_route('banners.index');
+    }
+
+    /**
+     * Quickly Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function quickupdate(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'display_status' => 'required|integer',
+            'start_display_at' => 'required|date',
+            'stop_display_at' => 'required|date',
+        ]);
+
+        $banner = Banner::find($id);
+        
+        if($request->display_status == 1)
+        {
+            $banner->is_active = 1;
+        }
+        else
+        {
+            $banner->is_active = 0;
+        }
+
+        $banner->start_display_at = $request->start_display_at;
+        $banner->stop_display_at = $request->stop_display_at;
+
+        $banner->save();
+        
+        return back()->with('success_message', 'Update saved.');
     }
 }

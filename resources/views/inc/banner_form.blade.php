@@ -57,21 +57,21 @@
         
                 <div class="mb-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="display_above_page" name="display_above_page" value="1"  @if (isset($banner) && !$banner->display_above_page) notchecked @else checked @endif>
+                        <input class="form-check-input" type="checkbox" id="display_above_page" name="display_above_page" value="1"  @if (isset($banner) && !$banner->is_display_above_page) notchecked @else checked @endif>
                         <label class="form-check-label" for="dispalay_above_page">Display above page</label>
                     </div>
                 </div>
         
                 <div class="mb-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="display_in_sidebar" name="display_in_sidebar" value="1"  @if (isset($banner) && !$banner->display_in_sidebar) notchecked @else checked @endif>
+                        <input class="form-check-input" type="checkbox" id="display_in_sidebar" name="display_in_sidebar" value="1"  @if (isset($banner) && !$banner->is_display_in_sidebar) notchecked @else checked @endif>
                         <label class="form-check-label" for="dispalay_in_sidebar">Display in sidebar</label>
                     </div>
                 </div>
         
                 <div class="mb-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="display_within_page" name="display_within_page" value="1"  @if (isset($banner) && !$banner->display_within_page) notchecked @else checked @endif>
+                        <input class="form-check-input" type="checkbox" id="display_within_page" name="display_within_page" value="1"  @if (isset($banner) && !$banner->is_display_within_page) notchecked @else checked @endif>
                         <label class="form-check-label" for="dispalay_within_page">Display within page</label>
                     </div>
                 </div>
@@ -83,14 +83,14 @@
         
                 <div class="mb-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="display_on_homepage" name="display_on_homepage" value="1"  @if (isset($banner) && !$banner->display_on_homepage) notchecked @else checked @endif>
+                        <input class="form-check-input" type="checkbox" id="display_on_homepage" name="display_on_homepage" value="1"  @if (isset($banner) && !$banner->is_display_on_homepage) notchecked @else checked @endif>
                         <label class="form-check-label" for="dispalay_on_homepage">Display on homepage</label>
                     </div>
                 </div>
 
                 <div class="mb-4">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="display_on_allsegments" onchange="displaySegmentOption(event)" name="display_on_allsegments" value="1"   @if (isset($post) && !$post->is_scheduled) notchecked @else checked @endif>
+                        <input class="form-check-input" type="checkbox" id="display_on_allsegments" onchange="displaySegmentOption(event)" name="display_on_allsegments" value="1"   @if (isset($banner) && $banner->is_display_on_allsegments == 1) checked @else notchecked @endif>
                         <label class="form-check-label" for="display_on_allsegments">Display on all segments</label>
                     </div>
                 </div>
@@ -128,11 +128,11 @@
     <div class="col-md-4">
         <div class="mb-3">
             <div>
-                <label class="col-form-label">Featured Image <small>(Optional)</small>: <br><small class="text-muted">HINT - Best images sizes: <br>1200 x 600 <i>-or-</i> 800 x 400 <i>-or-</i> 600 x 300</small></label>
+                <label class="col-form-label">Featured Image <small>(Optional)</small>:</label>
                 
             </div>
-            <div id="preview">@if (isset($post) && $post->featured_image ) <img src="{{ $post->featured_image }}" alt=""> @else <p>Preview</p> @endif</div>
-            <label for="image" class="upload-label" id="upload-label">@if (isset($post->featured_image) && $post->featured_image) Change featured image @else Select a file @endif</label>
+            <div id="preview">@if (isset($banner) && $banner->featured_image ) <img src="{{ $banner->featured_image }}" alt=""> @else <p>Preview</p> @endif</div>
+            <label for="image" class="upload-label" id="upload-label">@if (isset($banner->featured_image) && $banner->featured_image) Change featured image @else Select a file @endif</label>
             <input type="file" accept="image/*" id="image" onchange="getImagePreview(event)" name="featured_image" class="upload-field" value="{{ old('featured_image') }}" required>
         </div>
 

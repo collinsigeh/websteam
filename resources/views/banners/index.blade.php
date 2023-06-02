@@ -22,7 +22,7 @@
                     <thead>
                         <tr>
                             <th colspan="2">Banner Ad</th>
-                            <th class="text-center"><span class="d-none d-sm-inline-block">Is Active</span></th>
+                            <th class="text-center"><span class="d-none d-sm-inline-block">Status</span></th>
                             <th class="text-center d-none d-md-table-cell">Impressions</th>
                             <th class="text-center d-none d-md-table-cell">Clicks</th>
                             <th class="text-center d-none d-lg-table-cell">Created</th>

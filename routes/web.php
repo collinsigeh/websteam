@@ -33,6 +33,7 @@ Route::get('/contact', [WebController::class, 'contact'])->name('contact');
 Route::get('/click/{id}', [WebController::class, 'redirect'])->name('banners.redirect');
 Route::post('/submit_contact_form', [WebController::class, 'submitContactForm'])->name('submit_contact_form');
 
+Route::patch('/banners/{id}', [BannerController::class, 'quickupdate'])->name('banners.quickupdate');
 Route::resource('/banners', BannerController::class);
 
 Route::resource('/categories', CategoryController::class);
