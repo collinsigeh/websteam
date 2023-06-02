@@ -125,3 +125,12 @@
     background-color: #fdfdfd;
     color: #707070;
 }
+
+.post-content {
+    padding: 15px;
+}
+
+.post-content img {
+    width: 100%;
+    margin: 15px 0;
+}

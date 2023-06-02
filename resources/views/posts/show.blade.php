@@ -36,7 +36,7 @@
                         <h6 class="post-info-title">Total Views:</h6>
                         <div class="post-total-views">{{ $post->views }}</div>
                     </div>
-                    <div class="post-info bg-appgrey">
+                    <div class="mb-3 post-info bg-appgrey">
                         <h6 class="post-info-title">Publication Settings:</h6>
                         <div class="post-publication-settings">
                             <form action="{{ route('posts.quickupdate', $post->id) }}" method="post">
@@ -68,14 +68,19 @@
                                     <div class="mb-3">
                                         <label for="publication_status" class="col-form-label"><small>Publication Status:</small></label>
                                         <select class="form-select form-select-sm" aria-label="Post visibility options" id="publication_status" name="publication_status" required>
-                                            <option value="{{ $post->is_published }}">
+                                            <option value="{{ $post->is_published }}" selected>
                                                 @if ($post->is_published == 1)
                                                     Published
                                                 @else
                                                     NOT Published
                                                 @endif
                                             </option>
-                                            
+                                            <option value=""></option>
+                                            @if ($post->is_published == 1)
+                                                <option value="0">Unpublish</option>
+                                            @else
+                                                <option value="1">Publish</option>
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
@@ -85,6 +90,33 @@
                             </form>
                         </div>
                     </div>
+                </div>
+
+                <div class="col-md-8 col-lg-9">
+                    @include('inc.post_edit_content_button')
+
+                    <div class="post-content">
+                        <h3>{{ $post->title }}</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="{{ $post->featured_image }}" alt="">
+                            </div>
+                        </div>
+                        <div class="body">
+                            {!! $post->body !!}
+                        </div>
+                        @include('inc.post_tags')
+                        <div class="categories">
+                            <h6>REPORT SEGMENTS:</h6>
+                            <p>
+                                @foreach ($post->categories as $segment)
+                                    <span class="btn btn-sm btn-outline-secondary">{{ $segment->category_name }}</span>
+                                @endforeach
+                            </p>
+                        </div>
+                    </div>
+
+                    @include('inc.post_edit_content_button')
                 </div>
             </div>
         </div>

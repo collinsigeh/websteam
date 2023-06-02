@@ -241,13 +241,15 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function quickupdate(Request $request, Post $post)
+    public function quickupdate(Request $request, $id)
     {
         $validated = $request->validate([
             'primary_category' => 'required|integer',
             'visibility' => 'required|in:public,paid_subscribers,private',
             'publication_status' => 'required',
         ]);
+
+        $post = Post::find($id);
         
         $post->primary_category_id = $request->primary_category;
         $post->visibility = $request->visibility;
