@@ -6,7 +6,10 @@
   @endforeach
 </div>
 @endif
-@if ($success_message = Session::get('success_message'))
+@if (strlen(Session::get('success_message') > 1) && $success_message = Session::get('success_message'))
+@php
+  Session::put('success_message', '');
+@endphp
 <div class="alert alert-success">
   {{ $success_message }}
 </div>
