@@ -17,9 +17,8 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="pre-header-ad">
-        
-    </div>
+    @include('inc.above_page_ad')
+    
     <header>
         <a href="{{ route('welcome')}}" class="logo">PENGlobal</a>
 

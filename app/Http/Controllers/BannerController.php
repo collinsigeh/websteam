@@ -43,11 +43,11 @@ class BannerController extends Controller
             $request->session()->put('error_message', 'No post category found. Start by creating one here.');
             return to_route('categories.create');
         }
-        $min_time = Carbon::now()->timestamp + (60 * 60 * 2);
-        $min_time = date('Y-m-d H:i',$min_time);
+        $min_timestamp = Carbon::now()->timestamp + (15 * 60);
+        $min_time = date('Y-m-d H:i',$min_timestamp);
         
-        $min_stop_time = Carbon::now()->timestamp + (60 * 60 * 26);
-        $min_stop_time = date('Y-m-d H:i',$min_stop_time);
+        $min_stop_timestamp = $min_timestamp + (60 * 60 * 24);
+        $min_stop_time = date('Y-m-d H:i',$min_stop_timestamp);
 
         return view('banners.create', [
             'categories' => $categories,
@@ -68,7 +68,7 @@ class BannerController extends Controller
             'title' => 'required|max:200',
             'redirect_url' => 'required|url|max:250',
             'start_display_at' => 'required|date',
-            'stop_display_at' => 'required|date',
+            'stop_display_at' => 'required|date|after:start_display_at',
             'featured_image' => 'required|image',
             'additional_information' => 'sometimes|max:250',
         ]);
@@ -178,11 +178,11 @@ class BannerController extends Controller
             $request->session()->put('error_message', 'No post category found. Start by creating one here.');
             return to_route('categories.create');
         }
-        $min_time = Carbon::now()->timestamp + (60 * 60 * 2);
-        $min_time = date('Y-m-d H:i',$min_time);
+        $min_timestamp = Carbon::now()->timestamp + (15 * 60);
+        $min_time = date('Y-m-d H:i',$min_timestamp);
         
-        $min_stop_time = Carbon::now()->timestamp + (60 * 60 * 26);
-        $min_stop_time = date('Y-m-d H:i',$min_stop_time);
+        $min_stop_timestamp = $min_timestamp + (60 * 60 * 24);
+        $min_stop_time = date('Y-m-d H:i',$min_stop_timestamp);
 
         return view('banners.edit', [
             'banner' => $banner,
@@ -205,7 +205,7 @@ class BannerController extends Controller
             'title' => 'required|max:200',
             'redirect_url' => 'required|url|max:250',
             'start_display_at' => 'required|date',
-            'stop_display_at' => 'required|date',
+            'stop_display_at' => 'required|date|after:start_display_at',
             'featured_image' => 'sometimes|image',
             'additional_information' => 'sometimes|max:250',
         ]);

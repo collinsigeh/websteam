@@ -9,10 +9,14 @@ body {
 }
 
 #pre-header-ad {
-    width: 800px;
+    width: 100%;
     height: 250px;
-    margin: 2px auto;
-    background-color: #ED7B43;
+    margin: 2px 0;
+    text-align: center;
+}
+
+#pre-header-ad img {
+    height: 100%;
 }
 
 header {
@@ -182,8 +186,8 @@ main {
     border-bottom: 1px dotted black;
 }
 
-#latest-post, .next-to-latest {
-    min-height: 350px;
+.next-to-latest {
+    min-height: 300px;
 }
 
 .block-post {
@@ -195,21 +199,31 @@ main {
     text-decoration: none;
 }
 
+#latest-post a:hover, .next-to-latest a:hover, .block-post a:hover {
+    text-decoration: underline;
+}
+
 #latest-post img, .next-to-latest img, .block-post img {
     width: 100%
 }
 
-#latest-post h2, .next-to-latest h5, .block-post h6 {
+#latest-post h2, .next-to-latest h6, .block-post h6 {
     padding: 15px;
     font-weight: bold;
     line-height: 1.4em;
 }
 
 .sidebar-ad {
-    width: 300px;
-    height: 250px;
-    background-color: #ED7B43;
+    width: 100%;
+    margin: 2px 0;
+    margin-bottom: 20px;
+    text-align: center;
 }
+
+.sidebar-ad img {
+    height: 100%;
+}
+
 
 .segment-block {
     margin-top: 50px;
@@ -247,4 +261,31 @@ footer a {
     color: black;
 }
 
+.bg-appcolor {
+    background-color: #ED7B43;
+}
 
+.popular-post {
+    background-color: #f7f7f7;
+}
+
+.popular-post a{
+    color: black;
+    text-decoration: none;
+}
+
+.popular-post a:hover {
+    text-decoration: underline;
+}
+
+.within-page-ad {
+    width: 100%;
+    height: 250px;
+    margin: 2px 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.within-page-ad img {
+    height: 100%;
+}

@@ -7,6 +7,7 @@ use App\Mail\ContactMail;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -17,6 +18,7 @@ class WebController extends Controller
     {
         $segments = Category::where('is_active', 1)->get();
         $posts = Post::where('is_published', 1)->latest()->take(4)->get();
+        $popular_posts = Post::where('is_published', 1)->orderBy('views', 'desc')->take(8)->get();
         $post_blocks = [];
 
         foreach($segments as $segment)
@@ -26,11 +28,59 @@ class WebController extends Controller
                 array_push($post_blocks, ['title' => $segment->category_name, 'posts' => Post::where('is_published', 1)->where('primary_category_id', $segment->id)->latest()->take(4)->get()]);
             }
         }
+        
+        $now = Carbon::now()->toDateTimeString();
+
+        $above_page_ad = Banner::where('is_display_above_page', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($above_page_ad)
+        {
+            $ap_ad = Banner::find($above_page_ad->id);
+            $ap_ad->impressions = $ap_ad->impressions + 1;
+            $ap_ad->save();
+        }
+                            
+        $sidebar_ad = Banner::where('is_display_in_sidebar', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($sidebar_ad)
+        {
+            $s_ad = Banner::find($sidebar_ad->id);
+            $s_ad->impressions = $s_ad->impressions + 1;
+            $s_ad->save();
+        }
+                            
+        $within_page_ad = Banner::where('is_display_within_page', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($within_page_ad)
+        {
+            $wp_ad = Banner::find($above_page_ad->id);
+            $wp_ad->impressions = $wp_ad->impressions + 1;
+            $wp_ad->save();
+        }
 
         return view('webhome', [
             'segments' => $segments,
             'posts' => $posts,
+            'popular_posts' => $popular_posts,
             'post_blocks' => $post_blocks,
+            'above_page_ad' => $above_page_ad,
+            'sidebar_ad' => $sidebar_ad,
+            'within_page_ad' => $within_page_ad,
         ]);
     }
 
@@ -41,6 +91,9 @@ class WebController extends Controller
 
         return view('about', [
             'segments' => $segments,
+            'above_page_ad' => null,
+            'sidebar_ad' => null,
+            'within_page_ad' => null,
         ]);
     }
 
@@ -51,6 +104,9 @@ class WebController extends Controller
 
         return view('contact', [
             'segments' => $segments,
+            'above_page_ad' => null,
+            'sidebar_ad' => null,
+            'within_page_ad' => null,
         ]);
     }
 
