@@ -9,7 +9,7 @@
           Do you want to delete <b>"{{ $category->category_name }}"</b> category?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">No, cancel action</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">No, cancel action</button>
           <button type="button" class="btn btn-appprimary">Yes</button>
         </div>
       </div>

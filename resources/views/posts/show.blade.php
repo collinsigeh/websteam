@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="col-md-8 col-lg-9">
-                    @include('inc.post_edit_content_button')
+                    @include('inc.post_edit_delete_content')
 
                     <div class="post-content">
                         <h3>{{ $post->title }}</h3>
@@ -116,10 +116,12 @@
                         </div>
                     </div>
 
-                    @include('inc.post_edit_content_button')
+                    @include('inc.post_edit_delete_content')
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@include('inc.confirm_post_delete')
 @endsection

@@ -9,8 +9,13 @@
           Do you want to delete the post titled: <b>"{{ $post->title }}"</b>?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">No, cancel action</button>
-          <button type="button" class="btn btn-appprimary">Yes</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">No, cancel action</button>
+          <form action="{{ route('posts.destroy', $post->id)}}" method="post">
+            @csrf
+            @method('DELETE')
+
+            <input type="submit" value="Yes" class="btn btn-appprimary">
+          </form>
         </div>
       </div>
     </div>

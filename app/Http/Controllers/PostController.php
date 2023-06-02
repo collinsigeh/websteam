@@ -216,7 +216,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        dd($post->title);
     }
 
     // Handles ckeditor image upload
