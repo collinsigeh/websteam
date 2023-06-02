@@ -106,6 +106,7 @@
                             {!! $post->body !!}
                         </div>
                         @include('inc.post_tags')
+                        @if ($post->categories->count() > 0)
                         <div class="categories">
                             <h6>REPORT SEGMENTS:</h6>
                             <p>
@@ -114,6 +115,7 @@
                                 @endforeach
                             </p>
                         </div>
+                        @endif
                     </div>
 
                     @include('inc.post_edit_delete_content')

@@ -7,6 +7,7 @@ use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -214,9 +215,20 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
-        dd($post->title);
+        $featured_image = basename($post->featured_image);
+
+        $post->delete();
+
+        if (strlen($featured_image) > 2 && File::exists(public_path('media/'.$featured_image)))
+        {
+            File::delete(public_path('media/'.$featured_image));
+        }
+
+        $request->session()->put('success_message', 'Post deleted Successfully.');
+    
+        return to_route('posts.index');
     }
 
     // Handles ckeditor image upload
