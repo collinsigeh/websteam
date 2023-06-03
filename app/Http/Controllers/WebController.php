@@ -130,8 +130,10 @@ class WebController extends Controller
     {
         $post->views = $post->views + 1;
         $post->save();
-
+        
+        $more_reads = Post::where('id', '!=', $post->id)->where('primary_category_id', $post->primary_category_id)->latest()->take(4)->get();
         $latest_posts = Post::where('is_published', 1)->latest()->take(8)->get();
+        $popular_posts = Post::where('is_published', 1)->orderBy('views', 'desc')->take(8)->get();
         $segments = Category::where('is_active', 1)->get();
         
         $now = Carbon::now()->toDateTimeString();
@@ -180,7 +182,9 @@ class WebController extends Controller
 
         return view('post_view', [
             'post' => $post,
+            'more_reads' => $more_reads,
             'latest_posts' => $latest_posts,
+            'popular_posts' => $popular_posts,
             'segments' => $segments,
             'above_page_ad' => $above_page_ad,
             'sidebar_ad' => $sidebar_ad,

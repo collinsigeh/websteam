@@ -303,3 +303,18 @@ footer a {
     width: 100%;
     margin: 10px 0 40px 0;
 }
+
+.text-appcolor {
+    color: #ED7B43;
+}
+
+.bg-applightcolor {
+    background-color: #f7f7f7;
+}
+
+.extra-post-content-heading{
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-bottom: 3px solid #ED7B43;
+    margin-top: 10px;
+}
