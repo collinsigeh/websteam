@@ -66,7 +66,7 @@ class BannerController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:200',
-            'redirect_url' => 'required|url|max:250',
+            'redirect_url' => 'required|max:250',
             'start_display_at' => 'required|date',
             'stop_display_at' => 'required|date|after:start_display_at',
             'featured_image' => 'required|image',
@@ -203,7 +203,7 @@ class BannerController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:200',
-            'redirect_url' => 'required|url|max:250',
+            'redirect_url' => 'required|max:250',
             'start_display_at' => 'required|date',
             'stop_display_at' => 'required|date|after:start_display_at',
             'featured_image' => 'sometimes|image',

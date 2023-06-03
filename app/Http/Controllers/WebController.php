@@ -143,8 +143,20 @@ class WebController extends Controller
      * @param  \App\Models\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function redirect(Banner $banner)
+    public function redirect($id)
     {
-        //
+        $banner = Banner::find($id);
+
+        if($banner)
+        {
+            $banner->clicks = $banner->clicks + 1;
+            $banner->save();
+            //dd($banner->redirect_url);
+            return redirect($banner->redirect_url);
+        }
+        else
+        {
+            return to_route('welcome');
+        }
     }
 }
