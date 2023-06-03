@@ -114,12 +114,78 @@ class WebController extends Controller
     public function view_segment(Category $category)
     {
         dd($category->id);
+
+        $segments = Category::where('is_active', 1)->get();
+
+        return view('contact', [
+            'segments' => $segments,
+            'above_page_ad' => null,
+            'sidebar_ad' => null,
+            'within_page_ad' => null,
+        ]);
     }
 
     // Displays a specific post
     public function view_post(Post $post)
     {
-        dd($post->title);
+        $post->views = $post->views + 1;
+        $post->save();
+
+        $latest_posts = Post::where('is_published', 1)->latest()->take(8)->get();
+        $segments = Category::where('is_active', 1)->get();
+        
+        $now = Carbon::now()->toDateTimeString();
+
+        $above_page_ad = Banner::where('is_display_above_page', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($above_page_ad)
+        {
+            $ap_ad = Banner::find($above_page_ad->id);
+            $ap_ad->impressions = $ap_ad->impressions + 1;
+            $ap_ad->save();
+        }
+                            
+        $sidebar_ad = Banner::where('is_display_in_sidebar', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($sidebar_ad)
+        {
+            $s_ad = Banner::find($sidebar_ad->id);
+            $s_ad->impressions = $s_ad->impressions + 1;
+            $s_ad->save();
+        }
+                            
+        $within_page_ad = Banner::where('is_display_within_page', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($within_page_ad)
+        {
+            $wp_ad = Banner::find($above_page_ad->id);
+            $wp_ad->impressions = $wp_ad->impressions + 1;
+            $wp_ad->save();
+        }
+
+        return view('post_view', [
+            'post' => $post,
+            'latest_posts' => $latest_posts,
+            'segments' => $segments,
+            'above_page_ad' => $above_page_ad,
+            'sidebar_ad' => $sidebar_ad,
+            'within_page_ad' => $within_page_ad,
+        ]);
     }
 
     // Handles web contact form submission
@@ -130,11 +196,6 @@ class WebController extends Controller
         session(['sent_message' => 'Message Sent! Thanks for contacting us.']);
 
         return to_route('contact');
-    }
-
-    public function newhome()
-    {
-        return view('newhome');
     }
 
     /**

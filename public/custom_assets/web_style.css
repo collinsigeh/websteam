@@ -289,3 +289,17 @@ footer a {
 .within-page-ad img {
     height: 100%;
 }
+
+#post-view {
+    width: 100%;
+}
+
+#post-view #title {
+    font-weight: bold;
+    line-height: 1.4em;
+}
+
+#post-view #featured-image {
+    width: 100%;
+    margin: 10px 0 40px 0;
+}
