@@ -113,15 +113,64 @@ class WebController extends Controller
     // Displays posts within a category (report segment)
     public function view_segment(Category $category)
     {
-        dd($category->id);
-
+        $segment_posts = Post::where('primary_category_id', $category->id)->latest()->paginate(10);
+        $latest_posts = Post::where('is_published', 1)->latest()->take(8)->get();
+        $popular_posts = Post::where('is_published', 1)->orderBy('views', 'desc')->take(8)->get();
         $segments = Category::where('is_active', 1)->get();
+        
+        $now = Carbon::now()->toDateTimeString();
 
-        return view('contact', [
+        $above_page_ad = Banner::where('is_display_above_page', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($above_page_ad)
+        {
+            $ap_ad = Banner::find($above_page_ad->id);
+            $ap_ad->impressions = $ap_ad->impressions + 1;
+            $ap_ad->save();
+        }
+                            
+        $sidebar_ad = Banner::where('is_display_in_sidebar', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($sidebar_ad)
+        {
+            $s_ad = Banner::find($sidebar_ad->id);
+            $s_ad->impressions = $s_ad->impressions + 1;
+            $s_ad->save();
+        }
+                            
+        $within_page_ad = Banner::where('is_display_within_page', 1)
+                            ->where('is_active', 1)
+                            ->where('is_display_on_homepage', 1)
+                            ->where('start_display_at', '<=', $now)
+                            ->where('stop_display_at', '>=', $now)
+                            ->get()->shuffle()->first();
+
+        if($within_page_ad)
+        {
+            $wp_ad = Banner::find($above_page_ad->id);
+            $wp_ad->impressions = $wp_ad->impressions + 1;
+            $wp_ad->save();
+        }
+
+        return view('segment_view', [
+            'segment' => $category,
+            'segment_posts' => $segment_posts,
+            'latest_posts' => $latest_posts,
+            'popular_posts' => $popular_posts,
             'segments' => $segments,
-            'above_page_ad' => null,
-            'sidebar_ad' => null,
-            'within_page_ad' => null,
+            'above_page_ad' => $above_page_ad,
+            'sidebar_ad' => $sidebar_ad,
+            'within_page_ad' => $within_page_ad,
         ]);
     }
 

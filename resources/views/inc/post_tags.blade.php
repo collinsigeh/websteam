@@ -7,7 +7,7 @@
             $tags_array = explode(',', $post->tags)
         @endphp
         @foreach ($tags_array as $tag)
-            <span class="btn btn-sm btn-outline-secondary">{{ $tag }}</span>
+            <span class="btn btn-sm btn-outline-secondary mb-1">{{ $tag }}</span>
         @endforeach
     </p>
     @endif
