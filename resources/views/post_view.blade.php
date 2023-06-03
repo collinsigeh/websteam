@@ -6,6 +6,7 @@
     <div class="col-lg-8 col-xl-9">
         <div id="post-view">
             <h2 id="title">{{ $post->title }}</h2>
+            @include('inc.social_share_buttons')
             <img id="featured-image" src="{{ $post->featured_image }}" alt="">
             <div id="body">
                 {!! $post->body !!}
