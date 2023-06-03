@@ -44,10 +44,10 @@
     </div>
     <div class="col-lg-4 col-xl-3">
         @include('inc.social_icons')
-        @include('inc.latest_posts')
         <div class="my-4">
             @include('inc.sidebar_ad')
         </div>
+        @include('inc.latest_posts')
         @include('inc.popular_posts')
     </div>
 </div>

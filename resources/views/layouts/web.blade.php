@@ -38,7 +38,7 @@
                         @endforeach
                     </ul>
                 </li>
-                <li><a href="#">donate</a></li>
+                <li><a href="{{ route('donate') }}">donate</a></li>
                 <li><a href="{{ route('contact') }}">contact</a></li>
             </ul>
         </nav>

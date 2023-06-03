@@ -110,6 +110,19 @@ class WebController extends Controller
         ]);
     }
 
+    // Displays the web donate page
+    public function donate()
+    {
+        $segments = Category::where('is_active', 1)->get();
+
+        return view('donate', [
+            'segments' => $segments,
+            'above_page_ad' => null,
+            'sidebar_ad' => null,
+            'within_page_ad' => null,
+        ]);
+    }
+
     // Displays posts within a category (report segment)
     public function view_segment(Category $category)
     {
