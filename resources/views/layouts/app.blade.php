@@ -133,6 +133,10 @@
                                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                     User Accounts
                                 </a>
+                                <a class="nav-link" href="{{ route('settings.edit') }}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div>
+                                    Settings
+                                </a>
                             @endif
 
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();

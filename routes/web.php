@@ -33,6 +33,7 @@ Route::get('/about', [WebController::class, 'about'])->name('about');
 Route::get('/contact', [WebController::class, 'contact'])->name('contact');
 Route::get('/click/{id}', [WebController::class, 'redirect'])->name('banners.redirect');
 Route::get('/donate', [WebController::class, 'donate'])->name('donate');
+Route::get('/upgrade-in-progress', [WebController::class, 'upgrade'])->name('upgrade');
 Route::post('/submit_contact_form', [WebController::class, 'submitContactForm'])->name('submit_contact_form');
 
 Route::patch('/banners/quickupdate/{id}', [BannerController::class, 'quickupdate'])->name('banners.quickupdate');
@@ -53,6 +54,9 @@ Route::get('/users', [HomeController::class, 'users_index'])->name('users.index'
 Route::get('/users/{user}/edit', [HomeController::class, 'users_edit'])->name('users.edit');
 Route::patch('/users/{user}', [HomeController::class, 'users_update'])->name('users.update');
 Route::delete('users/{user}', [HomeController::class, 'users_destroy'])->name('users.destroy');
+
+Route::get('/settings', [HomeController::class, 'settings_edit'])->name('settings.edit');
+Route::patch('/settings', [HomeController::class, 'settings_update'])->name('settings.update');
 
 Auth::routes();
 

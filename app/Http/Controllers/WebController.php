@@ -7,6 +7,7 @@ use App\Mail\ContactMail;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -16,6 +17,12 @@ class WebController extends Controller
     // Displays the web homepage
     public function welcome()
     {
+        $settings = Setting::where('name', 'Application')->first();
+        if($settings->is_live != 1)
+        {
+            return to_route('upgrade');
+        }
+
         $segments = Category::where('is_active', 1)->get();
         $posts = Post::where('is_published', 1)->latest()->take(4)->get();
         $popular_posts = Post::where('is_published', 1)->orderBy('views', 'desc')->take(8)->get();
@@ -88,6 +95,12 @@ class WebController extends Controller
     // Displays the web about page
     public function about()
     {
+        $settings = Setting::where('name', 'Application')->first();
+        if($settings->is_live != 1)
+        {
+            return to_route('upgrade');
+        }
+
         $segments = Category::where('is_active', 1)->get();
 
         return view('about', [
@@ -101,6 +114,12 @@ class WebController extends Controller
     // Displays the web contact page
     public function contact()
     {
+        $settings = Setting::where('name', 'Application')->first();
+        if($settings->is_live != 1)
+        {
+            return to_route('upgrade');
+        }
+
         $segments = Category::where('is_active', 1)->get();
 
         return view('contact', [
@@ -114,6 +133,12 @@ class WebController extends Controller
     // Displays the web donate page
     public function donate()
     {
+        $settings = Setting::where('name', 'Application')->first();
+        if($settings->is_live != 1)
+        {
+            return to_route('upgrade');
+        }
+
         $segments = Category::where('is_active', 1)->get();
 
         return view('donate', [
@@ -127,6 +152,12 @@ class WebController extends Controller
     // Displays posts within a category (report segment)
     public function view_segment(Category $category)
     {
+        $settings = Setting::where('name', 'Application')->first();
+        if($settings->is_live != 1)
+        {
+            return to_route('upgrade');
+        }
+
         $segment_posts = Post::where('primary_category_id', $category->id)->latest()->paginate(10);
         $latest_posts = Post::where('is_published', 1)->latest()->take(8)->get();
         $popular_posts = Post::where('is_published', 1)->orderBy('views', 'desc')->take(8)->get();
@@ -191,6 +222,12 @@ class WebController extends Controller
     // Displays a specific post
     public function view_post(Post $post)
     {
+        $settings = Setting::where('name', 'Application')->first();
+        if($settings->is_live != 1)
+        {
+            return to_route('upgrade');
+        }
+
         $post->views = $post->views + 1;
         $post->save();
         
@@ -258,6 +295,12 @@ class WebController extends Controller
     // Handles web contact form submission
     public function submitContactForm(ContactRequest $request)
     {
+        $settings = Setting::where('name', 'Application')->first();
+        if($settings->is_live != 1)
+        {
+            return to_route('upgrade');
+        }
+
         //Mail::to('admin@penglobalinc.com')->send(new ContactMail($request->name, $request->email, $request->message));
 
         session(['sent_message' => 'Message Sent! Thanks for contacting us.']);
@@ -273,6 +316,12 @@ class WebController extends Controller
      */
     public function redirect($id)
     {
+        $settings = Setting::where('name', 'Application')->first();
+        if($settings->is_live != 1)
+        {
+            return to_route('upgrade');
+        }
+        
         $banner = Banner::find($id);
 
         if($banner)
@@ -286,5 +335,18 @@ class WebController extends Controller
         {
             return to_route('welcome');
         }
+    }
+
+    // Displays the upgrade-in-progress page
+    public function upgrade()
+    {
+        $segments = Category::where('is_active', 1)->get();
+
+        return view('upgrade', [
+            'segments' => $segments,
+            'above_page_ad' => null,
+            'sidebar_ad' => null,
+            'within_page_ad' => null,
+        ]);
     }
 }

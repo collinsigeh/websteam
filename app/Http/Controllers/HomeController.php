@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Post;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -189,5 +190,39 @@ class HomeController extends Controller
         $request->session()->put('success_message', 'User account deleted Successfully.');
     
         return to_route('users.index');
+    }
+
+    // Displays settings for update
+    public function settings_edit()
+    {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+
+        $setting = Setting::where('name', 'Application')->firstOrFail();
+
+        return view('dashboard.setting', [
+            'setting' => $setting,
+        ]);
+    }
+
+    // Saves settings modifications
+    public function settings_update(Request $request)
+    {
+        $request->validate([
+            'production_settings' => 'required|integer'
+        ]);
+
+        if($request->production_settings == 1)
+        {
+            Setting::where('name', 'Application')->update(['is_live' => 1]);
+        }
+        else
+        {
+            Setting::where('name', 'Application')->update(['is_live' => 0]);
+        }
+
+        return back()->with('success_message', 'Saved!');
     }
 }
