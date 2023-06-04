@@ -55,7 +55,7 @@ class HomeController extends Controller
         ]);
     }
 
-    // Handles change of profile password
+    // Handles change of own profile password
     public function changepassword(Request $request)
     {
         $request->validate([
@@ -72,6 +72,11 @@ class HomeController extends Controller
     // Displays the list of users
     public function users_index()
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $users = User::orderBy('name', 'asc')->paginate(10);
 
         return view('users.index', [
@@ -87,6 +92,11 @@ class HomeController extends Controller
      */
     public function users_edit(User $user)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         return view('users.edit', [
             'user' => $user,
         ]);
@@ -101,6 +111,11 @@ class HomeController extends Controller
      */
     public function users_update(Request $request, User $user)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $validated = $request->validate([
             'username' => 'required|unique:users,username,'.$user->id,
             'name' => 'required|max:200',
@@ -151,6 +166,11 @@ class HomeController extends Controller
      */
     public function users_destroy(Request $request, User $user)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         if($user->id == $request->user()->id)
         {
             return back()->with('error_message', 'ERROR - Own account CANNOT be deleted.');
@@ -159,8 +179,15 @@ class HomeController extends Controller
         {
             return back()->with('error_message', 'ERROR - Primary user account CANNOT be deleted.');
         }
+        if($user->posts->count() > 0 || $user->banners->count() > 0)
+        {
+            return back()->with('error_message', 'ERROR - User account CANNOT be deleted. It has related resources.');
+        }
 
         $user->delete();
-        return back()->with('success_message', 'User account deleted Successfully.');
+        
+        $request->session()->put('success_message', 'User account deleted Successfully.');
+    
+        return to_route('users.index');
     }
 }

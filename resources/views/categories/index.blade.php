@@ -16,7 +16,7 @@
                     <thead>
                         <tr>
                             <th>Category</th>
-                            <th class="text-center d-none d-sm-table-cell">No. of Posts</th>
+                            <th class="text-center d-none d-sm-table-cell">Related Posts</th>
                             <th colspan="3"></th>
                         </tr>
                     </thead>

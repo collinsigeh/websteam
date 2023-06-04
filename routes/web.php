@@ -9,6 +9,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,7 @@ Route::resource('/banners', BannerController::class);
 Route::resource('/categories', CategoryController::class);
 
 Route::post('/upload', [PostController::class, 'upload'])->name('ckeditor.upload');
+Route::get('posts/search', [PostController::class, 'search'])->name('posts.search');
 Route::patch('/posts/quickupdate/{id}', [PostController::class, 'quickupdate'])->name('posts.quickupdate');
 Route::resource('/posts', PostController::class);
 

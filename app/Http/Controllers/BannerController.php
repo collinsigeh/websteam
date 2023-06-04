@@ -23,6 +23,11 @@ class BannerController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+
         $banners = Banner::latest()->paginate(10);
 
         return view('banners.index', [
@@ -37,6 +42,11 @@ class BannerController extends Controller
      */
     public function create(Request $request)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $categories = Category::where('is_active', 1)->orderBy('category_name', 'asc')->get();
         if ($categories->count() < 1)
         {
@@ -64,6 +74,11 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $validated = $request->validate([
             'title' => 'required|max:200',
             'redirect_url' => 'required|max:250',
@@ -156,6 +171,11 @@ class BannerController extends Controller
      */
     public function show(Banner $banner)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $categories = Category::orderBy('category_name', 'asc')->get();
 
         return view('banners.show', [
@@ -172,6 +192,11 @@ class BannerController extends Controller
      */
     public function edit(Request $request, Banner $banner)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $categories = Category::where('is_active', 1)->orderBy('category_name', 'asc')->get();
         if ($categories->count() < 1)
         {
@@ -201,6 +226,11 @@ class BannerController extends Controller
      */
     public function update(Request $request, Banner $banner)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $validated = $request->validate([
             'title' => 'required|max:200',
             'redirect_url' => 'required|max:250',
@@ -302,6 +332,11 @@ class BannerController extends Controller
      */
     public function destroy(Request $request, Banner $banner)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $featured_image = basename($banner->featured_image);
 
         $banner->delete();
@@ -325,6 +360,11 @@ class BannerController extends Controller
      */
     public function quickupdate(Request $request, $id)
     {
+        if(auth()->user()->is_admin != 1)
+        {
+            return to_route('home');
+        }
+        
         $validated = $request->validate([
             'display_status' => 'required|integer',
             'start_display_at' => 'required|date',

@@ -52,10 +52,14 @@
                     <a class="btn btn-sm btn-appprimary" href="{{ route('posts.show', $post->id) }}" title="View"><i class="fas fa-arrow-up-right-from-square"></i></a>
                 </td>
                 <td width="40">
-                    <a class="btn btn-sm btn-primary" href="{{ route('posts.edit', $post->id) }}" title="Edit"><i class="fas fa-pencil"></i></a>
+                    @if (auth()->user()->is_editor == 1 || auth()->user()->id == $post->user_id)
+                        <a class="btn btn-sm btn-primary" href="{{ route('posts.edit', $post->id) }}" title="Edit"><i class="fas fa-pencil"></i></a>
+                    @endif
                 </td>
                 <td width="40">
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $post->id }}" title="Delete"><i class="fa-regular fa-circle-xmark"></i></button>
+                    @if (auth()->user()->is_editor == 1 || auth()->user()->id  == $post->user_id)
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $post->id }}" title="Delete"><i class="fa-regular fa-circle-xmark"></i></button>
+                    @endif
                 </td>
             </tr>
             @endforeach

@@ -36,7 +36,11 @@
                                 <div class="post-primary-category">
                                     <div class="mb-1">
                                         <label for="primary_category" class="col-form-label"><small>Primary Category:</small></label>
-                                        <select class="form-select form-select-sm" aria-label="Primary category" id="primary_category" name="primary_category" required>
+                                        <select class="form-select form-select-sm" aria-label="Primary category" id="primary_category" name="primary_category" required
+                                            @if (auth()->user()->is_editor != 1 && auth()->user()->id  != $post->user_id)
+                                                disabled
+                                            @endif
+                                        >
                                             <option value=""></option>
                                             @foreach ($categories as $category)
                                             <option value="{{ $category->id }}" @if (isset($post) && $post->primary_category_id == $category->id) selected @else @if (old('primary_category') == $category->id) selected @endif @endif>{{ $category->category_name }}</option>
@@ -47,7 +51,11 @@
                                 <div class="post-visibility">
                                     <div class="mb-1">
                                         <label for="visibility" class="col-form-label"><small>Visibility:</small></label>
-                                        <select class="form-select form-select-sm" aria-label="Post visibility options" id="visibility" name="visibility" required>
+                                        <select class="form-select form-select-sm" aria-label="Post visibility options" id="visibility" name="visibility" required
+                                        @if (auth()->user()->is_editor != 1 && auth()->user()->id  != $post->user_id)
+                                            disabled
+                                        @endif
+                                    >
                                             <option value="public" @if (isset($post) && $post->visibility == 'public') selected @else @if (old('visibility') == 'public') selected @endif @endif>Public (all visitors)</option>
                                             <option value="paid_subscribers" @if (isset($post) && $post->visibility == 'paid_subscribers') selected @else @if (old('visibility') == 'paid_subscribers') selected @endif @endif>Paid subscribers</option>
                                             <option value="private" @if (isset($post) && $post->visibility == 'private') selected @else @if (old('visibility') == 'private') selected @endif @endif>Private (admins, editors, and the author only)</option>
@@ -57,7 +65,11 @@
                                 <div class="post-publication-status">
                                     <div class="mb-3">
                                         <label for="publication_status" class="col-form-label"><small>Publication Status:</small></label>
-                                        <select class="form-select form-select-sm" aria-label="Post visibility options" id="publication_status" name="publication_status" required>
+                                        <select class="form-select form-select-sm" aria-label="Post visibility options" id="publication_status" name="publication_status" required
+                                        @if (auth()->user()->is_editor != 1 && auth()->user()->id  != $post->user_id)
+                                            disabled
+                                        @endif
+                                    >
                                             <option value="{{ $post->is_published }}" selected>
                                                 @if ($post->is_published == 1)
                                                     Published
@@ -74,16 +86,20 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="text-end">
-                                    <input type="submit" value="Save Changes" class="btn btn-sm btn-outline-appprimary">
-                                </div>
+                                @if (auth()->user()->is_editor == 1 || auth()->user()->id  == $post->user_id)
+                                    <div class="text-end">
+                                        <input type="submit" value="Save Changes" class="btn btn-sm btn-outline-appprimary">
+                                    </div>
+                                @endif
                             </form>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-8 col-lg-9">
-                    @include('inc.post_edit_delete_content')
+                    @if (auth()->user()->is_editor == 1 || auth()->user()->id  == $post->user_id)
+                        @include('inc.post_edit_delete_content')
+                    @endif
 
                     <div class="post-content">
                         <h3>{{ $post->title }}</h3>
@@ -108,7 +124,9 @@
                         @endif
                     </div>
 
-                    @include('inc.post_edit_delete_content')
+                    @if (auth()->user()->is_editor == 1 || auth()->user()->id  == $post->user_id)
+                        @include('inc.post_edit_delete_content')
+                    @endif
                 </div>
             </div>
         </div>

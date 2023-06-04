@@ -37,6 +37,11 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
+        if(auth()->user()->is_editor != 1 && auth()->user()->is_author != 1)
+        {
+            return to_route('home');
+        }
+        
         $categories = Category::where('is_active', 1)->orderBy('category_name', 'asc')->get();
         if ($categories->count() < 1)
         {
@@ -60,6 +65,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->is_editor != 1 && auth()->user()->is_author != 1)
+        {
+            return to_route('home');
+        }
+        
         $validated = $request->validate([
             'title' => '
                 required|unique:posts|max:200
@@ -140,6 +150,11 @@ class PostController extends Controller
      */
     public function edit(Request $request, Post $post)
     {
+        if(auth()->user()->is_editor != 1 && auth()->user()->id != $post->user_id)
+        {
+            return to_route('home');
+        }
+        
         $categories = Category::where('is_active', 1)->orderBy('category_name', 'asc')->get();
         if ($categories->count() < 1)
         {
@@ -165,6 +180,11 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if(auth()->user()->is_editor != 1 && auth()->user()->id != $post->user_id)
+        {
+            return to_route('home');
+        }
+        
         $validated = $request->validate([
             'title' => '
                 required|unique:posts,title,'.$post->id.'|max:200
@@ -227,6 +247,11 @@ class PostController extends Controller
      */
     public function destroy(Request $request, Post $post)
     {
+        if(auth()->user()->is_editor != 1 && auth()->user()->id != $post->user_id)
+        {
+            return to_route('home');
+        }
+        
         $featured_image = basename($post->featured_image);
 
         $post->delete();
@@ -273,6 +298,11 @@ class PostController extends Controller
 
         $post = Post::find($id);
         
+        if(auth()->user()->is_editor != 1 && auth()->user()->is_author != $post->user_id)
+        {
+            return to_route('home');
+        }
+        
         $post->primary_category_id = $request->primary_category;
         $post->visibility = $request->visibility;
 
@@ -292,5 +322,20 @@ class PostController extends Controller
         $post->save();
         
         return back()->with('success_message', 'Update saved.');
+    }
+
+    // Handles search for posts
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $posts = Post::query()
+        ->where('title', 'LIKE', "%{$search}%")
+        ->orWhere('body', 'LIKE', "%{$search}%")
+        ->paginate(50);
+        
+        return view('posts.search', [
+            'posts' => $posts,
+        ]);
     }
 }

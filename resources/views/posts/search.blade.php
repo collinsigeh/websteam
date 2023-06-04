@@ -2,10 +2,11 @@
 
 @section('content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4">All Posts</h1>
+    <h1 class="mt-4">Search Result</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a class="app-link" href="{{ route('home') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active">All Posts</li>
+        <li class="breadcrumb-item"><a class="app-link" href="{{ route('posts.index') }}">All Posts</a></li>
+        <li class="breadcrumb-item active">Search Result</li>
     </ol>
     <div class="mb-4"> 
         @include('inc.posts_search_form')
@@ -15,8 +16,8 @@
         <div class="data-card">
             @if ($posts->count() < 1)
             <div class="text-center">
-                <div class="alert alert-info">No post to dispay.</div>
-                <a href="{{ route('posts.create') }}" class="btn btn-appprimary">Create your first post</a>
+                <div class="alert alert-info">No matching post found.</div>
+                <a href="{{ route('posts.index') }}" class="btn btn-appprimary">Return to posts page</a>
             </div>
             @else
             @include('inc.posts_table', [
