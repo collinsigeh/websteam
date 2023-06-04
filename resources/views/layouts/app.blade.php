@@ -54,7 +54,7 @@
                         <!--
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         -->
-                        <li><a class="dropdown-item" href="#!">My Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile', Auth::user()->username) }}">My Profile</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -117,7 +117,7 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">More Options</div>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('users.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 User Accounts
                             </a>

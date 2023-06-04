@@ -6,7 +6,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Do you want to delete the post titled: <b>"{{ $post->title }}"</b>?
+          <p>Do you want to delete the post titled:</p><b>"{{ $post->title }}"</b>?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">No, cancel action</button>

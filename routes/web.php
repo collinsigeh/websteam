@@ -40,10 +40,17 @@ Route::resource('/banners', BannerController::class);
 Route::resource('/categories', CategoryController::class);
 
 Route::post('/upload', [PostController::class, 'upload'])->name('ckeditor.upload');
-Route::patch('/posts/uickupdate/{id}', [PostController::class, 'quickupdate'])->name('posts.quickupdate');
+Route::patch('/posts/quickupdate/{id}', [PostController::class, 'quickupdate'])->name('posts.quickupdate');
 Route::resource('/posts', PostController::class);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/profile/{user:username}', [HomeController::class, 'profile'])->name('profile');
+Route::patch('/profile/changepassword', [HomeController::class, 'changepassword'])->name('changepassword');
+
+Route::get('/users', [HomeController::class, 'users_index'])->name('users.index');
+Route::get('/users/{user}/edit', [HomeController::class, 'users_edit'])->name('users.edit');
+Route::patch('/users/{user}', [HomeController::class, 'users_update'])->name('users.update');
+Route::delete('users/{user}', [HomeController::class, 'users_destroy'])->name('users.destroy');
 
 Auth::routes();
 

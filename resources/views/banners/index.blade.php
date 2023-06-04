@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4">All Banners</h1>
+    <h1 class="mt-4">Banner Ads</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a class="app-link" href="{{ route('home') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active">All Banners</li>
+        <li class="breadcrumb-item active">Banner Ads</li>
     </ol>
     <div class="mb-4"> 
         @include('inc.alert_messages')
@@ -48,7 +48,7 @@
                                         @if ($banner->is_active)
                                             <i class="fas fa-check text-success"></i>
                                         @else
-                                            <i class="fas fa-xmark text-secondary"></i>
+                                            <i class="fas fa-xmark text-danger"></i>
                                         @endif
                                     </a>
                                 </span>

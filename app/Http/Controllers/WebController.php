@@ -68,7 +68,7 @@ class WebController extends Controller
 
         if($within_page_ad)
         {
-            $wp_ad = Banner::find($above_page_ad->id);
+            $wp_ad = Banner::find($within_page_ad->id);
             $wp_ad->impressions = $wp_ad->impressions + 1;
             $wp_ad->save();
         }
@@ -170,7 +170,7 @@ class WebController extends Controller
 
         if($within_page_ad)
         {
-            $wp_ad = Banner::find($above_page_ad->id);
+            $wp_ad = Banner::find($within_page_ad->id);
             $wp_ad->impressions = $wp_ad->impressions + 1;
             $wp_ad->save();
         }
@@ -237,7 +237,7 @@ class WebController extends Controller
 
         if($within_page_ad)
         {
-            $wp_ad = Banner::find($above_page_ad->id);
+            $wp_ad = Banner::find($within_page_ad->id);
             $wp_ad->impressions = $wp_ad->impressions + 1;
             $wp_ad->save();
         }

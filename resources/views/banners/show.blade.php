@@ -4,7 +4,7 @@
 <div class="container-fluid px-4">
     <h1 class="mt-4">{{ $banner->title }}</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a class="app-link" href="{{ route('banners.index') }}">All Banner Ads</a></li>
+        <li class="breadcrumb-item"><a class="app-link" href="{{ route('banners.index') }}">Banner Ads</a></li>
         <li class="breadcrumb-item active">{{ substr($banner->title, 0, 35).'...' }}</li>
     </ol>
 

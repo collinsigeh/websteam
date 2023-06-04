@@ -29,9 +29,9 @@ class Banner extends Model
         'clicks',
     ];
 
-    public function user(): BelongsTo
+    public function user(): BelongsToMany
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function categories(): BelongsToMany
