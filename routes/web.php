@@ -46,6 +46,7 @@ Route::get('posts/search', [PostController::class, 'search'])->name('posts.searc
 Route::patch('/posts/quickupdate/{id}', [PostController::class, 'quickupdate'])->name('posts.quickupdate');
 Route::resource('/posts', PostController::class);
 
+Route::get('/deactivated', [HomeController::class, 'deactivated'])->name('deactivated');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/profile/{user:username}', [HomeController::class, 'profile'])->name('profile');
 Route::patch('/profile/changepassword', [HomeController::class, 'changepassword'])->name('changepassword');

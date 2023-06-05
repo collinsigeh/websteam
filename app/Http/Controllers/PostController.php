@@ -23,6 +23,11 @@ class PostController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         $posts = Post::latest()->paginate(10);
 
         return view('posts.index', [
@@ -37,6 +42,11 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1 && auth()->user()->is_author != 1)
         {
             return to_route('home');
@@ -65,6 +75,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1 && auth()->user()->is_author != 1)
         {
             return to_route('home');
@@ -134,6 +149,11 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         $categories = Category::orderBy('category_name', 'asc')->get();
 
         return view('posts.show', [
@@ -150,6 +170,11 @@ class PostController extends Controller
      */
     public function edit(Request $request, Post $post)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1 && auth()->user()->id != $post->user_id)
         {
             return to_route('home');
@@ -180,6 +205,11 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1 && auth()->user()->id != $post->user_id)
         {
             return to_route('home');
@@ -247,6 +277,11 @@ class PostController extends Controller
      */
     public function destroy(Request $request, Post $post)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1 && auth()->user()->id != $post->user_id)
         {
             return to_route('home');
@@ -269,6 +304,11 @@ class PostController extends Controller
     // Handles ckeditor image upload
     public function upload(Request $request)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if($request->hasFile('upload'))
         {
             $originName = $request->file('upload')->getClientOriginalName();
@@ -290,6 +330,11 @@ class PostController extends Controller
      */
     public function quickupdate(Request $request, $id)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         $validated = $request->validate([
             'primary_category' => 'required|integer',
             'visibility' => 'required|in:public,paid_subscribers,private',
@@ -327,6 +372,11 @@ class PostController extends Controller
     // Handles search for posts
     public function search(Request $request)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         $search = $request->input('search');
 
         $posts = Post::query()

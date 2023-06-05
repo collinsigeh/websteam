@@ -13,7 +13,7 @@
   Session::put('error_message', '');
 @endphp
 <div class="alert alert-danger">
-  {{ $error_message }}
+  {!! $error_message !!}
 </div>
 @endif
 
@@ -23,6 +23,6 @@
   Session::put('success_message', '');
 @endphp
 <div class="alert alert-success">
-  {{ $success_message }}
+  {!! $success_message !!}
 </div>
 @endif

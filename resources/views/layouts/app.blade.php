@@ -81,54 +81,57 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            <div class="sb-sidenav-menu-heading">Contents</div>
                             
-                            @if (auth()->user()->is_editor == 1)
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                    Categories
+                            @if (auth()->user()->is_active == 1)
+                                <div class="sb-sidenav-menu-heading">Contents</div>
+                                
+                                @if (auth()->user()->is_editor == 1)
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                        Categories
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ route('categories.index') }}">All Categories</a>
+                                            <a class="nav-link" href="{{ route('categories.create') }}">New Category</a>
+                                        </nav>
+                                    </div>
+                                @endif
+                                
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                    Posts
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="{{ route('categories.index') }}">All Categories</a>
-                                        <a class="nav-link" href="{{ route('categories.create') }}">New Category</a>
+                                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                        <a class="nav-link" href="{{ route('posts.index') }}">All Posts</a>
+                                        @if (auth()->user()->is_editor == 1 || auth()->user()->is_author == 1)
+                                            <a class="nav-link" href="{{ route('posts.create') }}">New Post</a>
+                                        @endif
                                     </nav>
                                 </div>
-                            @endif
-                            
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Posts
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="{{ route('posts.index') }}">All Posts</a>
-                                    @if (auth()->user()->is_editor == 1 || auth()->user()->is_author == 1)
-                                        <a class="nav-link" href="{{ route('posts.create') }}">New Post</a>
-                                    @endif
-                                </nav>
-                            </div>
 
-                            @if (auth()->user()->is_admin == 1)
-                                <div class="sb-sidenav-menu-heading">Advertisements</div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdverts" aria-expanded="false" aria-controls="collapseAdverts">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                    Banner Ads
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="collapseAdverts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="{{ route('banners.index') }}">All Banner Ads</a>
-                                        <a class="nav-link" href="{{ route('banners.create') }}">New Banner Ad</a>
-                                    </nav>
-                                </div>
+                                @if (auth()->user()->is_admin == 1)
+                                    <div class="sb-sidenav-menu-heading">Advertisements</div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdverts" aria-expanded="false" aria-controls="collapseAdverts">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                        Banner Ads
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="collapseAdverts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ route('banners.index') }}">All Banner Ads</a>
+                                            <a class="nav-link" href="{{ route('banners.create') }}">New Banner Ad</a>
+                                        </nav>
+                                    </div>
+                                @endif
                             @endif
                             
                             <div class="sb-sidenav-menu-heading">More Options</div>
-
-                            @if (auth()->user()->is_admin == 1)
+                            
+                            @if (auth()->user()->is_active == 1 && auth()->user()->is_admin == 1)
                                 <a class="nav-link" href="{{ route('users.index') }}">
                                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                     User Accounts

@@ -21,6 +21,13 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    // Displays the deactivated account dashboard
+    public function deactivated(Request $request)
+    {
+        $request->session()->put('error_message', 'This account is currently <strong>deactivated</strong>. Please contact the admin for reactivation.');
+        return view('dashboard.deactivated');
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -28,6 +35,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         $post_views = Post::sum('views');
         $ad_impressions = Banner::sum('impressions');
         $ad_clicks = Banner::sum('clicks');
@@ -73,6 +85,11 @@ class HomeController extends Controller
     // Displays the list of users
     public function users_index()
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -93,6 +110,11 @@ class HomeController extends Controller
      */
     public function users_edit(User $user)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -112,6 +134,11 @@ class HomeController extends Controller
      */
     public function users_update(Request $request, User $user)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -177,6 +204,11 @@ class HomeController extends Controller
      */
     public function users_destroy(Request $request, User $user)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -205,6 +237,11 @@ class HomeController extends Controller
     // Displays settings for update
     public function settings_edit()
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -220,6 +257,11 @@ class HomeController extends Controller
     // Saves settings modifications
     public function settings_update(Request $request)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         $request->validate([
             'production_settings' => 'required|integer'
         ]);

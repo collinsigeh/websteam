@@ -23,6 +23,11 @@ class BannerController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -42,6 +47,11 @@ class BannerController extends Controller
      */
     public function create(Request $request)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -74,6 +84,11 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -171,6 +186,11 @@ class BannerController extends Controller
      */
     public function show(Banner $banner)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -192,6 +212,11 @@ class BannerController extends Controller
      */
     public function edit(Request $request, Banner $banner)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -226,6 +251,11 @@ class BannerController extends Controller
      */
     public function update(Request $request, Banner $banner)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -332,6 +362,11 @@ class BannerController extends Controller
      */
     public function destroy(Request $request, Banner $banner)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');
@@ -360,6 +395,11 @@ class BannerController extends Controller
      */
     public function quickupdate(Request $request, $id)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_admin != 1)
         {
             return to_route('home');

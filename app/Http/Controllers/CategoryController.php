@@ -21,6 +21,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1)
         {
             return to_route('home');
@@ -40,6 +45,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1)
         {
             return to_route('home');
@@ -56,6 +66,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1)
         {
             return to_route('home');
@@ -83,6 +98,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1)
         {
             return to_route('home');
@@ -99,6 +119,11 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1)
         {
             return to_route('home');
@@ -118,6 +143,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1)
         {
             return to_route('home');
@@ -143,6 +173,11 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request, Category $category)
     {
+        if(auth()->user()->is_active != 1)
+        {
+            return to_route('deactivated');
+        }
+
         if(auth()->user()->is_editor != 1)
         {
             return to_route('home');
