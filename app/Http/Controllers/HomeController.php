@@ -139,10 +139,20 @@ class HomeController extends Controller
         }
         else
         {
-            $user->is_active = $request->account_status;
-            $user->is_author = $request->author_role;
-            $user->is_editor = $request->editor_role;
-            $user->is_admin = $request->admin_role;
+            if($user->is_primary_user == 1)
+            {
+                $user->is_active = 1;
+                $user->is_author = 1;
+                $user->is_editor = 1;
+                $user->is_admin = 1;
+            }
+            else
+            {
+                $user->is_active = $request->account_status;
+                $user->is_author = $request->author_role;
+                $user->is_editor = $request->editor_role;
+                $user->is_admin = $request->admin_role;
+            }
         }
 
         $user->username = $request->username;
