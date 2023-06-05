@@ -227,7 +227,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <small>NOTE: Enabling the <strong>Primary User Role</strong> for this user will disable it for all other user accounts.</small>
+                            @if ($user->is_primary_user == 1)
+                                <small>NOTE: 
+                                    <ul>
+                                        <li>The account status and privileges of a <strong>Primary User cannot</strong> be deactivated or disabled.</li>
+                                        <li>The solutions is to assign the <strong>Primary User Role</strong> to another user.</li>
+                                    </ul>
+                                </small>
+                            @else
+                                <small>NOTE: Enabling the <strong>Primary User Role</strong> for this user will disable it for all other user accounts.</small>
+                            @endif
                         </div>
                         @endif
                     </div>
