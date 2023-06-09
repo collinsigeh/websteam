@@ -149,8 +149,8 @@
     <div class="col-md-4">
         <div class="mb-3">
             <div>
-                <label class="col-form-label">Featured Image <small>(Optional)</small>:</label>
-                
+                <label class="col-form-label">Featured Image <small>(Optional)</small>:</label><br>
+                <div style="text-align: right; margin-bottom: 8px;"><small> <button class="btn btn-sm btn-outline-secondary" style="font-size: 12px;"  data-bs-toggle="modal" data-bs-target="#staticBackdropBannerHint">View image hint</button></small></div>
             </div>
             <div id="preview">@if (isset($banner) && $banner->featured_image ) <img src="{{ $banner->featured_image }}" alt=""> @else <p>Preview</p> @endif</div>
             <label for="image" class="upload-label" id="upload-label">@if (isset($banner->featured_image) && $banner->featured_image) Change featured image @else Select a file @endif</label>
@@ -173,3 +173,5 @@
 <div class="mb-5 mt-4 text-center">
     <input type="submit" value="@if ($purpose == 'Edit') Save Changes @else Save @endif" class="btn btn-lg btn-appprimary">
 </div>
+
+@include('inc.banner_hint')
