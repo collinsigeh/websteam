@@ -40,10 +40,8 @@
                     </select>
                 </div>
             </div>
-            <div class="row mb-3 pt-3">
-              <div class="col-sm-10 offset-sm-2">
+            <div class="mb-3 pt-3 text-center">
                 <input type="submit" value="Send" class="btn btn-lg btn-appprimary">
-              </div>
             </div>
         </form>
     </div>
