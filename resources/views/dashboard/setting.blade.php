@@ -33,7 +33,7 @@
                         </option>
                         <option value=""></option>
                         @if ($setting->is_live == 1)
-                            <option value="0">Disable</option>
+                            <option value="0">Diable live mode</option>
                         @else
                             <option value="1">Go live</option>
                         @endif

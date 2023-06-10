@@ -9,17 +9,17 @@
             <h6>The Preferred Sizes for banner images are:</h6>
             <strong><u>Above Page Banner Ad:</u></strong>
             <ul>
-                <li>width from 600px to 1200px.</li>
-                <li>heigth of 300px.</li>
+                <li>width from 500px to 1200px.</li>
+                <li>heigth from 250px to 300px.</li>
             </ul>
             <strong><u>Within Page Banner Ad:</u></strong>
             <ul>
-                <li>width from 600px to 1200px.</li>
-                <li>height of 300px.</li>
+                <li>width from 500px to 1200px.</li>
+                <li>height from 100px to 300px.</li>
             </ul>
             <strong><u>Sidebar Banner Ad:</u></strong>
             <ul>
-                <li>width of 300px.</li>
+                <li>width from 300px to 400px.</li>
                 <li>height from 250px to 500px.</li>
             </ul>
             <div class="pb-4 mb-4">
