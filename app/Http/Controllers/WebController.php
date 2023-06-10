@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Setting;
+use App\Models\Traffic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Mail;
 class WebController extends Controller
 {
     // Displays the web homepage
-    public function welcome()
+    public function welcome(Request $request)
     {
+        $this->traffic_info($request);
+
         $settings = Setting::where('name', 'Application')->first();
         if($settings->is_live != 1)
         {
@@ -93,8 +96,10 @@ class WebController extends Controller
     }
 
     // Displays the web about page
-    public function about()
+    public function about(Request $request)
     {
+        $this->traffic_info($request);
+
         $settings = Setting::where('name', 'Application')->first();
         if($settings->is_live != 1)
         {
@@ -112,8 +117,10 @@ class WebController extends Controller
     }
 
     // Displays the web contact page
-    public function contact()
+    public function contact(Request $request)
     {
+        $this->traffic_info($request);
+
         $settings = Setting::where('name', 'Application')->first();
         if($settings->is_live != 1)
         {
@@ -131,8 +138,10 @@ class WebController extends Controller
     }
 
     // Displays the web donate page
-    public function donate()
+    public function donate(Request $request)
     {
+        $this->traffic_info($request);
+
         $settings = Setting::where('name', 'Application')->first();
         if($settings->is_live != 1)
         {
@@ -150,8 +159,10 @@ class WebController extends Controller
     }
 
     // Displays posts within a category (report segment)
-    public function view_segment(Category $category)
+    public function view_segment(Request $request, Category $category)
     {
+        $this->traffic_info($request);
+
         $settings = Setting::where('name', 'Application')->first();
         if($settings->is_live != 1)
         {
@@ -338,8 +349,10 @@ class WebController extends Controller
     }
 
     // Displays the upgrade-in-progress page
-    public function upgrade()
+    public function upgrade(Request $request)
     {
+        $this->traffic_info($request);
+        
         $segments = Category::where('is_active', 1)->get();
 
         return view('upgrade', [
@@ -348,5 +361,39 @@ class WebController extends Controller
             'sidebar_ad' => null,
             'within_page_ad' => null,
         ]);
+    }
+
+    // Stores traffic report details
+    public function traffic_info(Request $request)
+    {
+        $ip = $request->ip();
+        $page = config('app.url').'/'.$request->path();
+        $referer = request()->headers->get('referer');
+        
+        try 
+        {
+            $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
+        } 
+        catch (\Throwable $th) 
+        {
+            $location = [
+                'geoplugin_city' => null,
+                'geoplugin_countryName' => null,
+                'geoplugin_continentName' => null,
+            ];
+        }
+
+        $traffic = new Traffic();
+
+        $traffic->ip = $ip;
+        $traffic->page = $page;
+        $traffic->referrer = $referer;
+        $traffic->city = $location['geoplugin_city'];
+        $traffic->country = $location['geoplugin_countryName'];
+        $traffic->continent = $location['geoplugin_continentName'];
+
+        $traffic->save();
+        
+        return;
     }
 }

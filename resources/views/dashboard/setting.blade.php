@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="mb-3 pt-3 text-center">
-                <input type="submit" value="Send" class="btn btn-lg btn-appprimary">
+                <input type="submit" value="Save" class="btn btn-lg btn-appprimary">
             </div>
         </form>
     </div>
