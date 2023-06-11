@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4">Traffic Report</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a class="app-link" href="{{ route('home') }}">Dashboard</a></li>
         <li class="breadcrumb-item active">Traffic Report</li>
