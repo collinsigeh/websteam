@@ -136,17 +136,15 @@
                                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                     User Accounts
                                 </a>
+                                <a class="nav-link" href="{{ route('traffic.report') }}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-traffic-light"></i></div>
+                                    Traffic Report
+                                </a>
                                 <a class="nav-link" href="{{ route('settings.edit') }}">
                                     <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div>
                                     Settings
                                 </a>
                             @endif
-
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                                <div class="sb-nav-link-icon"><i class="fas fa-right-from-bracket"></i></div>
-                                Logout
-                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

@@ -59,6 +59,8 @@ Route::delete('users/{user}', [HomeController::class, 'users_destroy'])->name('u
 Route::get('/settings', [HomeController::class, 'settings_edit'])->name('settings.edit');
 Route::patch('/settings', [HomeController::class, 'settings_update'])->name('settings.update');
 
+Route::get('/traffic_report', [HomeController::class, 'traffic_report'])->name('traffic.report');
+
 Auth::routes();
 
 Route::get('/{post:slug}',[WebController::class, 'view_post'])->name('posts.view');

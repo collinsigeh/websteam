@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Post;
 use App\Models\Setting;
+use App\Models\Traffic;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -276,5 +278,77 @@ class HomeController extends Controller
         }
 
         return back()->with('success_message', 'Saved!');
+    }
+
+    // Displays the web traffic report
+    public function traffic_report()
+    {
+        $latest_traffic = Traffic::latest()->take(15)->get();
+
+        $now = Carbon::now()->timestamp;
+
+        $one_week_ago = date('Y-m-d H:i', ($now - (60 * 60 * 24 * 7)));
+        $one_month_ago = date('Y-m-d H:i', ($now - (60 * 60 * 24 * 30)));
+        $one_year_ago = date('Y-m-d H:i', ($now - (60 * 60 * 24 * 365)));
+
+        $past_year = Traffic::where('created_at', '>=', $one_year_ago)->get();
+        $past_year_total = $past_year->count();
+
+        $nigerian_1_year_total = 0;
+        $african_1_year_total = 0;
+        $nigerian_1_month_total = 0;
+        $african_1_month_total = 0;
+        $past_month_total = 0;
+        $nigerian_7_days_total = 0;
+        $african_7_days_total = 0;
+        $past_7_days_total = 0;
+        foreach ($past_year as $traffic) 
+        {
+            if($traffic->country == 'Nigeria')
+            {
+                $nigerian_1_year_total++;
+            }
+            if($traffic->continent == 'Africa')
+            {
+                $african_1_year_total++;
+            }
+            if($traffic->country == 'Nigeria' && $traffic->created_at >= $one_month_ago)
+            {
+                $nigerian_1_month_total++;
+            }
+            if($traffic->continent == 'Africa' & $traffic->created_at >= $one_month_ago)
+            {
+                $african_1_month_total++;
+            }
+            if ($traffic->created_at >= $one_month_ago)
+            {
+                $past_month_total++;
+            }
+            if($traffic->country == 'Nigeria' && $traffic->created_at >= $one_week_ago)
+            {
+                $nigerian_7_days_total++;
+            }
+            if($traffic->continent == 'Africa' && $traffic->created_at >= $one_week_ago)
+            {
+                $african_7_days_total++;
+            }
+            if ($traffic->created_at >= $one_week_ago)
+            {
+                $past_7_days_total++;
+            }
+        }
+
+        return view('dashboard.traffic_report', [
+            'latest_traffic' => $latest_traffic,
+            'past_7_days_total' => $past_7_days_total,
+            'nigerian_7_days_total' => $nigerian_7_days_total,
+            'african_7_days_total' => $african_7_days_total,
+            'past_month_total' => $past_month_total,
+            'nigerian_1_month_total' => $nigerian_1_month_total,
+            'african_1_month_total' => $african_1_month_total,
+            'past_year_total' => $past_year_total,
+            'nigerian_1_year_total' => $nigerian_1_year_total,
+            'african_1_year_total' => $african_1_year_total,
+        ]);
     }
 }

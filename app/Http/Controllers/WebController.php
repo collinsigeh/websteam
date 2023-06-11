@@ -352,7 +352,7 @@ class WebController extends Controller
     public function upgrade(Request $request)
     {
         $this->traffic_info($request);
-        
+
         $segments = Category::where('is_active', 1)->get();
 
         return view('upgrade', [
