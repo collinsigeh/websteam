@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('ip');
             $table->string('page');
-            $table->string('referrer');
-            $table->string('city');
-            $table->string('country');
-            $table->string('continent');
+            $table->string('referrer')->nullable()->default(null);
+            $table->string('city')->nullable()->default(null);
+            $table->string('country')->nullable()->default(null);
+            $table->string('continent')->nullable()->default(null);
             $table->timestamps();
         });
     }
