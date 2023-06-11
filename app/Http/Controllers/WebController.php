@@ -231,8 +231,10 @@ class WebController extends Controller
     }
 
     // Displays a specific post
-    public function view_post(Post $post)
+    public function view_post(Request $request, Post $post)
     {
+        $this->traffic_info($request);
+
         $settings = Setting::where('name', 'Application')->first();
         if($settings->is_live != 1)
         {
