@@ -42,6 +42,12 @@ class HomeController extends Controller
             return to_route('deactivated');
         }
 
+        // Deleting of very old traffic records
+        $now = Carbon::now()->timestamp;
+        $one_year_ago = date('Y-m-d H:i', ($now - (60 * 60 * 24 * 365)));
+        Traffic::where('created_at', '<', $one_year_ago)->delete();
+        // End traffic record deletion
+
         $post_views = Post::sum('views');
         $ad_impressions = Banner::sum('impressions');
         $ad_clicks = Banner::sum('clicks');
