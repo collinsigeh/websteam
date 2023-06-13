@@ -369,7 +369,7 @@ class WebController extends Controller
     public function traffic_info(Request $request)
     {
         $ip = $request->ip();
-        $page = config('app.url').'/'.$request->path();
+        $page = $request->path();
         $referer = request()->headers->get('referer');
         
         try 
