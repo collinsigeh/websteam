@@ -63,6 +63,14 @@
                                     <td>{{ $african_7_days_total }}</td>
                                 </tr>
                                 <tr>
+                                    <td>United Kingdom</td>
+                                    <td>{{ $uk_7_days_total }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Europe</td>
+                                    <td>{{ $europe_7_days_total }}</td>
+                                </tr>
+                                <tr>
                                     <td>Worldwide</td>
                                     <td>{{ $past_7_days_total }}</td>
                                 </tr>
@@ -90,6 +98,14 @@
                                 <tr>
                                     <td>Africa</td>
                                     <td>{{ $african_1_month_total }}</td>
+                                </tr>
+                                <tr>
+                                    <td>United Kingdom</td>
+                                    <td>{{ $uk_1_month_total }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Europe</td>
+                                    <td>{{ $europe_1_month_total }}</td>
                                 </tr>
                                 <tr>
                                     <td>Worldwide</td>
@@ -121,6 +137,14 @@
                                     <td>{{ $african_1_year_total }}</td>
                                 </tr>
                                 <tr>
+                                    <td>United Kingdom</td>
+                                    <td>{{ $uk_1_year_total }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Europe</td>
+                                    <td>{{ $europe_1_year_total }}</td>
+                                </tr>
+                                <tr>
                                     <td>Worldwide</td>
                                     <td>{{ $past_year_total }}</td>
                                 </tr>
@@ -141,9 +165,9 @@
                             <thead>
                                 <tr>
                                     <th>IP</th>
-                                    <th>City</th>
                                     <th>Country</th>
                                     <th>Continent</th>
+                                    <th>Visited at</th>
                                     <th>Page</th>
                                     <th>Referrer</th>
                                 </tr>
@@ -152,9 +176,9 @@
                                 @foreach ($latest_traffic as $traffic)
                                     <tr>
                                         <td>{{ $traffic->ip }}</td>
-                                        <td>{{ $traffic->city }}</td>
                                         <td>{{ $traffic->country }}</td>
                                         <td>{{ $traffic->continent }}</td>
+                                        <td>{{ $traffic->created_at->diffForHumans() }}</td>
                                         <td>{{ $traffic->page }}</td>
                                         <td>{{ $traffic->referrer }}</td>
                                     </tr>
