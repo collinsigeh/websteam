@@ -301,12 +301,18 @@ class HomeController extends Controller
         $past_year_total = $past_year->count();
 
         $nigerian_1_year_total = 0;
+        $uk_1_year_total = 0;
         $african_1_year_total = 0;
+        $europe_1_year_total = 0;
         $nigerian_1_month_total = 0;
+        $uk_1_month_total = 0;
         $african_1_month_total = 0;
+        $europe_1_month_total = 0;
         $past_month_total = 0;
         $nigerian_7_days_total = 0;
+        $uk_7_days_total = 0;
         $african_7_days_total = 0;
+        $europe_7_days_total = 0;
         $past_7_days_total = 0;
         foreach ($past_year as $traffic) 
         {
@@ -314,17 +320,33 @@ class HomeController extends Controller
             {
                 $nigerian_1_year_total++;
             }
+            if($traffic->country == 'United Kingdom')
+            {
+                $uk_1_year_total++;
+            }
             if($traffic->continent == 'Africa')
             {
                 $african_1_year_total++;
+            }
+            if($traffic->continent == 'Europe')
+            {
+                $europe_1_year_total++;
             }
             if($traffic->country == 'Nigeria' && $traffic->created_at >= $one_month_ago)
             {
                 $nigerian_1_month_total++;
             }
+            if($traffic->country == 'United Kingdom' && $traffic->created_at >= $one_month_ago)
+            {
+                $uk_1_month_total++;
+            }
             if($traffic->continent == 'Africa' & $traffic->created_at >= $one_month_ago)
             {
                 $african_1_month_total++;
+            }
+            if($traffic->continent == 'Europe' & $traffic->created_at >= $one_month_ago)
+            {
+                $europe_1_month_total++;
             }
             if ($traffic->created_at >= $one_month_ago)
             {
@@ -334,9 +356,17 @@ class HomeController extends Controller
             {
                 $nigerian_7_days_total++;
             }
+            if($traffic->country == 'United Kingdom' && $traffic->created_at >= $one_week_ago)
+            {
+                $uk_7_days_total++;
+            }
             if($traffic->continent == 'Africa' && $traffic->created_at >= $one_week_ago)
             {
                 $african_7_days_total++;
+            }
+            if($traffic->continent == 'Europe' && $traffic->created_at >= $one_week_ago)
+            {
+                $europe_7_days_total++;
             }
             if ($traffic->created_at >= $one_week_ago)
             {
@@ -348,13 +378,18 @@ class HomeController extends Controller
             'latest_traffic' => $latest_traffic,
             'past_7_days_total' => $past_7_days_total,
             'nigerian_7_days_total' => $nigerian_7_days_total,
+            'uk_7_days_total' => $uk_7_days_total,
             'african_7_days_total' => $african_7_days_total,
+            'europe_7_days_total' => $europe_7_days_total,
             'past_month_total' => $past_month_total,
             'nigerian_1_month_total' => $nigerian_1_month_total,
+            'uk_1_month_total' => $uk_1_month_total,
             'african_1_month_total' => $african_1_month_total,
             'past_year_total' => $past_year_total,
             'nigerian_1_year_total' => $nigerian_1_year_total,
+            'uk_1_year_total' => $uk_1_year_total,
             'african_1_year_total' => $african_1_year_total,
+            'europe_1_year_total' => $europe_1_year_total,
         ]);
     }
 }
