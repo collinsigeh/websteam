@@ -289,7 +289,7 @@ class HomeController extends Controller
     // Displays the web traffic report
     public function traffic_report()
     {
-        $latest_traffic = Traffic::latest()->take(15)->get();
+        $latest_traffic = Traffic::latest()->take(25)->get();
 
         $now = Carbon::now()->timestamp;
 
@@ -328,10 +328,6 @@ class HomeController extends Controller
             {
                 $african_1_year_total++;
             }
-            if($traffic->continent == 'Europe')
-            {
-                $europe_1_year_total++;
-            }
             if($traffic->country == 'Nigeria' && $traffic->created_at >= $one_month_ago)
             {
                 $nigerian_1_month_total++;
@@ -343,10 +339,6 @@ class HomeController extends Controller
             if($traffic->continent == 'Africa' & $traffic->created_at >= $one_month_ago)
             {
                 $african_1_month_total++;
-            }
-            if($traffic->continent == 'Europe' & $traffic->created_at >= $one_month_ago)
-            {
-                $europe_1_month_total++;
             }
             if ($traffic->created_at >= $one_month_ago)
             {
@@ -364,10 +356,6 @@ class HomeController extends Controller
             {
                 $african_7_days_total++;
             }
-            if($traffic->continent == 'Europe' && $traffic->created_at >= $one_week_ago)
-            {
-                $europe_7_days_total++;
-            }
             if ($traffic->created_at >= $one_week_ago)
             {
                 $past_7_days_total++;
@@ -380,7 +368,6 @@ class HomeController extends Controller
             'nigerian_7_days_total' => $nigerian_7_days_total,
             'uk_7_days_total' => $uk_7_days_total,
             'african_7_days_total' => $african_7_days_total,
-            'europe_7_days_total' => $europe_7_days_total,
             'past_month_total' => $past_month_total,
             'nigerian_1_month_total' => $nigerian_1_month_total,
             'uk_1_month_total' => $uk_1_month_total,
@@ -389,7 +376,6 @@ class HomeController extends Controller
             'nigerian_1_year_total' => $nigerian_1_year_total,
             'uk_1_year_total' => $uk_1_year_total,
             'african_1_year_total' => $african_1_year_total,
-            'europe_1_year_total' => $europe_1_year_total,
         ]);
     }
 }

@@ -67,10 +67,6 @@
                                     <td>{{ $uk_7_days_total }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Europe</td>
-                                    <td>{{ $europe_7_days_total }}</td>
-                                </tr>
-                                <tr>
                                     <td>Worldwide</td>
                                     <td>{{ $past_7_days_total }}</td>
                                 </tr>
@@ -102,10 +98,6 @@
                                 <tr>
                                     <td>United Kingdom</td>
                                     <td>{{ $uk_1_month_total }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Europe</td>
-                                    <td>{{ $europe_1_month_total }}</td>
                                 </tr>
                                 <tr>
                                     <td>Worldwide</td>
@@ -141,10 +133,6 @@
                                     <td>{{ $uk_1_year_total }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Europe</td>
-                                    <td>{{ $europe_1_year_total }}</td>
-                                </tr>
-                                <tr>
                                     <td>Worldwide</td>
                                     <td>{{ $past_year_total }}</td>
                                 </tr>
@@ -161,13 +149,12 @@
                 </div>
                 <div class="dashboard-data-card">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-sm table-hover">
                             <thead>
                                 <tr>
                                     <th>IP</th>
                                     <th>Country</th>
-                                    <th>Continent</th>
-                                    <th>Visited at</th>
+                                    <th>Visited</th>
                                     <th>Page</th>
                                     <th>Referrer</th>
                                 </tr>
@@ -177,8 +164,7 @@
                                     <tr>
                                         <td>{{ $traffic->ip }}</td>
                                         <td>{{ $traffic->country }}</td>
-                                        <td>{{ $traffic->continent }}</td>
-                                        <td>{{ $traffic->created_at->diffForHumans() }}</td>
+                                        <td><span class="badge text-bg-light">{{ $traffic->created_at->diffForHumans() }}</span></td>
                                         <td>{{ $traffic->page }}</td>
                                         <td>{{ $traffic->referrer }}</td>
                                     </tr>
