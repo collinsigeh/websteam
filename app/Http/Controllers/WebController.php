@@ -243,6 +243,11 @@ class WebController extends Controller
 
         $post->views = $post->views + 1;
         $post->save();
+
+        $post->body = str_replace('<figure class="media"><oembed url="https://www.youtube.com/watch?v=', '<iframe src="https://www.youtube.com/embed/', $post->body);
+        $post->body = str_replace('></oembed></figure>', ' frameborder="0" allowfullscreen></iframe>', $post->body);
+
+        //dd($post->body);
         
         $more_reads = Post::where('id', '!=', $post->id)->where('primary_category_id', $post->primary_category_id)->latest()->take(4)->get();
         $latest_posts = Post::where('is_published', 1)->latest()->take(8)->get();
