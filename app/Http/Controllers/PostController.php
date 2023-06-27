@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Testing;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -94,7 +95,7 @@ class PostController extends Controller
             'tags' => 'sometimes|max:200',
             'primary_category' => 'required|integer',
             'visibility' => 'required|in:public,paid_subscribers,private',
-            'publish_at' => 'sometimes|date',
+            // commented out for testing= 'publish_at' => 'sometimes|date',
         ]);
 
         $post = new Post;
@@ -228,7 +229,7 @@ class PostController extends Controller
             'tags' => 'sometimes|max:200',
             'primary_category' => 'required|integer',
             'visibility' => 'required|in:public,paid_subscribers,private',
-            'publish_at' => 'sometimes|date',
+            // commented out for testing= 'publish_at' => 'sometimes|date',
         ]);
 
         $post->title = $request->title;
