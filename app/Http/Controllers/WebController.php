@@ -245,6 +245,7 @@ class WebController extends Controller
         $post->save();
 
         $post->body = str_replace('<figure class="media"><oembed url="https://www.youtube.com/watch?v=', '<iframe src="https://www.youtube.com/embed/', $post->body);
+        $post->body = str_replace('<figure class="media"><oembed url="https://m.youtube.com/watch?v=', '<iframe src="https://www.youtube.com/embed/', $post->body);
         $post->body = str_replace('></oembed></figure>', ' frameborder="0" allowfullscreen></iframe>', $post->body);
 
         //dd($post->body);

@@ -157,6 +157,7 @@ class PostController extends Controller
         $categories = Category::orderBy('category_name', 'asc')->get();
 
         $post->body = str_replace('<figure class="media"><oembed url="https://www.youtube.com/watch?v=', '<iframe width="480" height="270" src="https://www.youtube.com/embed/', $post->body);
+        $post->body = str_replace('<figure class="media"><oembed url="https://m.youtube.com/watch?v=', '<iframe width="480" height="270" src="https://www.youtube.com/embed/', $post->body);
         $post->body = str_replace('></oembed></figure>', ' frameborder="0" allowfullscreen></iframe>', $post->body);
 
         return view('posts.show', [
