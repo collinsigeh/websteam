@@ -5,4 +5,6 @@
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="{{ $post->title }}" />
         <meta property="og:image"         content="{{ $post->featured_image }}" />
+
+        <link rel="image_src" href="{{ $post->featured_image }}"> 
 @endif

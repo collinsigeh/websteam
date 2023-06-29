@@ -473,3 +473,7 @@ iframe {
         height: 450px;
     }
 }
+
+figure.image img {
+    max-width: 100% !important;
+}
