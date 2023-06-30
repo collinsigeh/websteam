@@ -15,7 +15,11 @@
             <tr>
                 <td width="50" class="d-none d-sm-table-cell">
                     <a href="{{ route('posts.show', $post->id) }}">
-                        <img src="{{ $post->featured_image }}" alt="" class="table-featured-img">
+                        <img src="@if ($post->thumbnail_image)
+                            {{ $post->thumbnail_image }}
+                        @else
+                            {{ $post->featured_image }}
+                        @endif" alt="" class="table-featured-img">
                     </a>
                 </td>
                 <td>
