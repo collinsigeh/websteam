@@ -186,12 +186,16 @@ main {
     border-bottom: 1px dotted black;
 }
 
-.next-to-latest {
+.next-to-latest .card-post-content {
     min-height: 300px;
 }
 
-.block-post {
+.block-post .card-post-content{
     min-height: 250px;
+}
+
+p.card-post-date {
+    padding-left: 15px;
 }
 
 #latest-post a, .next-to-latest a, .block-post a {
@@ -483,4 +487,9 @@ figure.image img {
   block-size: auto;
   object-fit: cover;
     max-width: 100% !important;
+}
+
+p.card-post-date {
+    font-size: 12px;
+    color: #666666;
 }

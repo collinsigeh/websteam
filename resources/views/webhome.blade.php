@@ -10,6 +10,13 @@
                     <a href="{{ route('posts.view', $posts[0]->slug) }}"><img src="{{ $posts[0]->featured_image}}" alt=""></a>
                 @endif
                 <a href="{{ route('posts.view', $posts[0]->slug) }}"><h2>{{ $posts[0]->title }}</h2></a>
+                <div style="padding: 0 15px 15px 15px; margin-top: -15px; color: #666666; font-size: 14px;">
+                    @if ($posts[0]->created_at == $posts[0]->updated_at)
+                      {{ $posts[0]->updated_at->diffForHumans() }}
+                    @else
+                      updated {{ $posts[0]->updated_at->diffForHumans() }}
+                    @endif
+                </div>
             </div>
 
             <div id="next-to-latest-posts">
@@ -24,10 +31,13 @@
                     @if ($count > 1)
                     <div class="col-lg-4 col-md-6">
                         <div class="next-to-latest post">
-                            @if ($post->featured_image)
-                                <a href="{{ route('posts.view', $post->slug) }}"><img src="{{ $post->featured_image }}" alt=""></a>
-                            @endif
-                            <a href="{{ route('posts.view', $post->slug) }}"><h6>{{ $post->title }}</h6></a>
+                            <div class="card-post-content">
+                                @if ($post->featured_image)
+                                    <a href="{{ route('posts.view', $post->slug) }}"><img src="{{ $post->featured_image }}" alt=""></a>
+                                @endif
+                                <a href="{{ route('posts.view', $post->slug) }}"><h6>{{ $post->title }}</h6></a>
+                            </div>
+                            @include('inc.card_post_date')
                         </div>
                     </div>
                     @endif
@@ -46,12 +56,15 @@
                 @foreach ($segment['posts'] as $post)
                     <div class="col-lg-3 col-md-6">
                         <div class="block-post">
-                            @if ($post->featured_image)
-                                <a href="{{ route('posts.view', $post->slug) }}"><img src="{{ $post->featured_image }}" alt=""></a>
-                            @endif
-                            <a href="{{ route('posts.view', $post->slug) }}">
-                                <h6>{{ $post->title }}</h6>
-                            </a>
+                            <div class="card-post-content">
+                                @if ($post->featured_image)
+                                    <a href="{{ route('posts.view', $post->slug) }}"><img src="{{ $post->featured_image }}" alt=""></a>
+                                @endif
+                                <a href="{{ route('posts.view', $post->slug) }}">
+                                    <h6>{{ $post->title }}</h6>
+                                </a>
+                            </div>
+                            @include('inc.card_post_date')
                         </div>
                     </div>
                 @endforeach
