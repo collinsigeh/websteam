@@ -22,6 +22,8 @@
         <link rel="stylesheet" href="/custom_assets/style.css">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+        
+        @include('inc.create_thumbnail_js')
     </head>
     <body class="sb-nav-fixed">
         @include('inc.social_share_snippet_2')

@@ -30,7 +30,9 @@
             </div>
             <div id="preview">@if (isset($post) && $post->featured_image ) <img src="{{ $post->featured_image }}" alt=""> @else <p>Preview</p> @endif</div>
             <label for="image" class="upload-label" id="upload-label">@if (isset($post->featured_image) && $post->featured_image) Change featured image @else Select a file @endif</label>
-            <input type="file" accept="image/*" id="image" onchange="getImagePreview(event)" name="featured_image" class="upload-field" value="{{ old('featured_image') }}">
+            <input type="file" accept="image/*" id="image" onchange="processThumbnail()" name="featured_image" class="upload-field" value="{{ old('featured_image') }}">
+            
+            <input type="file" accept="image/*" id="thumbnail_image" name="thumbnail_image" class="upload-field" value="{{ old('thumbnail_image') }}">
         </div>
 
         <div class="mb-3">
