@@ -25,7 +25,13 @@
                                 <h5 id="title" class="mb-3">{{ $post->title }}</h5>
                             </a>
                             <div id="body">
-                                @include('inc.post_tags')
+                                <div style="margin-top: -10px; color: #666666; font-size: 14px;">
+                                    @if ($post->created_at == $post->updated_at)
+                                      {{ $post->updated_at->diffForHumans() }}
+                                    @else
+                                      updated {{ $post->updated_at->diffForHumans() }}
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
