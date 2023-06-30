@@ -474,6 +474,13 @@ iframe {
     }
 }
 
+figure.image {
+    width: 100%;
+}
+
 figure.image img {
+  max-inline-size: 100%;
+  block-size: auto;
+  object-fit: cover;
     max-width: 100% !important;
 }
