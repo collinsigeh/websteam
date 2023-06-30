@@ -122,7 +122,7 @@ class PostController extends Controller
             $extension = $request->file('thumbnail_image')->getClientOriginalExtension();
             $fileName = $fileName.'_'.time().'.'.$extension;
             $request->file('thumbnail_image')->move(public_path('media'), $fileName);
-            // $post->thumbnail_image =  asset('media/'.$fileName);
+            $post->thumbnail_image =  asset('media/'.$fileName);
         }
 
         $post->tags = $request->tags;
@@ -255,6 +255,16 @@ class PostController extends Controller
             $fileName = $fileName.'_'.time().'.'.$extension;
             $request->file('featured_image')->move(public_path('media'), $fileName);
             $post->featured_image =  asset('media/'.$fileName);
+        }
+
+        if($request->hasFile('thumbnail_image'))
+        {
+            $originName = $request->file('thumbnail_image')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('thumbnail_image')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
+            $request->file('thumbnail_image')->move(public_path('media'), $fileName);
+            $post->thumbnail_image =  asset('media/'.$fileName);
         }
 
         $post->tags = $request->tags;
